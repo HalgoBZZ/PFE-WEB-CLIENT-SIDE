@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="btn-group pull-left">
+      <button (click)="setMapType('terrain')" class="btn btn-primary">Terrain</button>
+      <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
+      <button (click)="setMapType('roadmap')" class="btn btn-warning">Routes</button>
+      <button [disabled]="isTracking" class="btn btn-primary" (click)="findMe()">Touvez-moi</button>
+    </div>
+    <div class="pull right">
+      <form class="form-inline" #form="ngForm">
+        <div class="form-group">
+          <input type="text" class="form-control" name="latitude" [(ngModel)]="latitude" placeholder="latitude" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="longitude" [(ngModel)]="longitude" placeholder="longitude" required>
+        </div>
+        <button type="button" (click)="setCenter()" class="btn btn-primary" [disabled]="form.invalid">Ok</button>
+      </form>
+    </div>
+  </div>
+  <div class="panel-body">    
+    <div #gmap style="width:1100px;height:500px"></div>
+  </div>
+</div>
+    
+ 

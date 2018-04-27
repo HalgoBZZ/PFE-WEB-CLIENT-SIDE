@@ -1,0 +1,266 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Chargement des tournées</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Formulaire</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Fermer</button>
+    </div>
+  </ng-template>
+  <!--***********************************choosing releveur-->
+  <ng-template #content4 let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Choix de releveur</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>liste des releveurs</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Fermer</button>
+        </div>
+      </ng-template>
+<!-- START DEFAULT DATATABLE -->
+ <div class="btn-group pull-left">
+    <button class="btn btn-success" (click)="open(content)">Chargement</button>
+</div><br><br>   
+ <div class="panel panel-default">
+        <div class="panel-heading">                                
+            <h3 class="panel-title">Tournée T1</h3>
+            <ul class="panel-controls">
+                    <li> <button class="btn btn-primary">Affecter</button></li>
+                <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                
+            </ul>                                
+        </div>
+        <div class="panel-body">
+            <table class="table datatable">
+                <thead>
+                    <tr>
+                        <th>Reference PDL</th>
+                        <th>Adresse</th>
+                        <th>Proprietaire</th>
+                        <th>Numero de compteur</th>
+                        <th>Index</th>
+                        <th>Releveur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>RF123</td>
+                        <td>Tunis</td>
+                        <td>Aymen Zayani</td>
+                        <td>123456</td>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>RF123</td>
+                        <td>Bardo</td>
+                        <td>Hafedh Baazouzi</td>
+                        <td>636660</td>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>RF231</td>
+                        <td>Ben Arous</td>
+                        <td>Med Ali Amri</td>
+                        <td>662025</td>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                        </td>
+                    </tr>
+                  
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END DEFAULT DATATABLE -->
+    <div class="panel panel-default">
+            <div class="panel-heading">                                
+                <h3 class="panel-title">Tournée T2</h3>
+                <ul class="panel-controls">
+                    <li> <button class="btn btn-primary">Affecter</button></li>
+                    <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                    <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                </ul>                                
+            </div>
+            <div class="panel-body">
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th>Reference PDL</th>
+                            <th>Adresse</th>
+                            <th>Proprietaire</th>
+                            <th>Numero de compteur</th>
+                            <th>Index</th>
+                            <th>Releveur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF123</td>
+                            <td>Tunis</td>
+                            <td>Aymen Zayani</td>
+                            <td>123456</td>
+                            <td></td>
+                            <td>
+                                <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>RF123</td>
+                            <td>Bardo</td>
+                            <td>Hafedh Baazouzi</td>
+                            <td>636660</td>
+                            <td></td>
+                            <td>
+                                <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>RF231</td>
+                            <td>Ben Arous</td>
+                            <td>Med Ali Amri</td>
+                            <td>662025</td>
+                            <td></td>
+                            <td>
+                                <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                            </td>
+                        </tr>
+                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END DEFAULT DATATABLE -->
+        <div class="panel panel-default">
+                <div class="panel-heading">                                
+                    <h3 class="panel-title">Tournée T3</h3>
+                    <ul class="panel-controls">
+                        <li> <button class="btn btn-primary">Affecter</button></li>
+                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                    </ul>                                
+                </div>
+                <div class="panel-body">
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th>Reference PDL</th>
+                                <th>Adresse</th>
+                                <th>Proprietaire</th>
+                                <th>Numero de compteur</th>
+                                <th>Index</th>
+                                <th>Releveur</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>RF123</td>
+                                <td>Tunis</td>
+                                <td>Aymen Zayani</td>
+                                <td>123456</td>
+                                <td></td>
+                                <td>
+                                    <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>RF123</td>
+                                <td>Bardo</td>
+                                <td>Hafedh Baazouzi</td>
+                                <td>636660</td>
+                                <td></td>
+                                <td>
+                                    <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>RF231</td>
+                                <td>Ben Arous</td>
+                                <td>Med Ali Amri</td>
+                                <td>662025</td>
+                                <td></td>
+                                <td>
+                                    <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                                </td>
+                            </tr>
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END DEFAULT DATATABLE -->
+            <div class="panel panel-default">
+                    <div class="panel-heading">                                
+                        <h3 class="panel-title">Tournée T4</h3>
+                        <ul class="panel-controls">
+                            <li> <button class="btn btn-primary">Affecter</button></li>
+                            <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                            <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                        </ul>                                
+                    </div>
+                    <div class="panel-body">
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th>Reference PDL</th>
+                                    <th>Adresse</th>
+                                    <th>Proprietaire</th>
+                                    <th>Numero de compteur</th>
+                                    <th>Index</th>
+                                    <th>Releveur</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>RF123</td>
+                                    <td>Tunis</td>
+                                    <td>Aymen Zayani</td>
+                                    <td>123456</td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RF123</td>
+                                    <td>Bardo</td>
+                                    <td>Hafedh Baazouzi</td>
+                                    <td>636660</td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>RF231</td>
+                                    <td>Ben Arous</td>
+                                    <td>Med Ali Amri</td>
+                                    <td>662025</td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
+                                    </td>
+                                </tr>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- END DEFAULT DATATABLE -->

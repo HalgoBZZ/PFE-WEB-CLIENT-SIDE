@@ -1,0 +1,207 @@
+
+        <span *ngIf="showLoader" class="loading"></span>
+        <ng-template #content let-c="close" let-d="dismiss">
+            <form #addingForm="ngForm">
+            <div class="modal-header">
+              <h4 class="modal-title">Ajout d'un responsable</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="width:100%;">
+                <div class="form-group">
+                        <label for="first" class="col-md-12 col-xs-12 control-label">Nom*:</label>
+                    <div class="col-md-12 col-xs-12">                                            
+                        <div class="input-group">
+                            <input type="text" name="first" id="first"  class="form-control" placeholder="Nom" required [(ngModel)]="newRes.cmpt_FIRST_NAME" [ngModelOptions]="{standalone: true}" #first="ngModel" /> 
+                            <div *ngIf="first.errors && (first.dirty || first.touched)" class="alert alert-danger">
+                                <div [hidden]="!first.errors.required">
+                                Nom est obligatoire!
+                                </div>
+                            </div>
+                        </div>                                            
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label for="last" class="col-md-12 col-xs-12 control-label">Prenom*:</label>
+                    <div class="col-md-12 col-xs-12">                                            
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="last" id="last" placeholder="Prenom" required [(ngModel)]="newRes.cmpt_LAST_NAME" [ngModelOptions]="{standalone: true}" #last="ngModel"/>
+                            <div *ngIf="last.errors && (last.dirty || last.touched)" class="alert alert-danger">
+                                    <div [hidden]="!last.errors.required">
+                                    Prenom est obligatoire!
+                                    </div>
+                                </div>
+                        </div>                                            
+                    </div>
+                </div>
+                <div class="form-group">             
+                        <label for="datenaiss" class="col-md-12 col-xs-12 control-label">Date de naissance*:</label>                           
+                    <div class="col-md-12 col-xs-12">
+                        <div class="input-group">
+                            <input type="date" class="form-control datepicker" name="datenaiss" id="datenaiss" placeholder="Date de naissance" required [(ngModel)]="newRes.cmpt_BIRTH" [ngModelOptions]="{standalone: true}" #datenaiss="ngModel"/>                                            
+                            <div *ngIf="datenaiss.errors && (datenaiss.dirty || datenaiss.touched)" class="alert alert-danger">
+                                    <div [hidden]="!datenaiss.errors.required">
+                                    Nom est obligatoire!
+                                    </div>
+                                </div>
+                        
+                        </div>
+                        
+                </div>
+                <div class="form-group">
+                        <label for="sexe" class="col-md-12 col-xs-12 control-label">Sexe*:</label>
+                    <div class="col-md-12 col-xs-12">                                            
+                        <div class="input-group">
+                                <select class="form-control select" name="sexe" id="sexe" placeholder="Selectionner sexe" required [(ngModel)]="newRes.cmpt_SEXE"  [ngModelOptions]="{standalone: true}" #sexe="ngModel">
+                                    <option value="HOMME">Homme</option>
+                                    <option value="FEMME">Femme</option>
+                                </select> 
+                                <div *ngIf="sexe.errors && (sexe.dirty || sexe.touched)" class="alert alert-danger">
+                                        <div [hidden]="!sexe.errors.required">
+                                        Choix de sexe est obligatoire!
+                                        </div>
+                                    </div>
+                        </div>                                            
+                    </div>
+                </div>
+                </div>
+                <div class="form-group">
+                        <label for="mail" class="col-md-12 col-xs-12 control-label">Email*:</label>
+                    <div class="col-md-12 col-xs-12">                                            
+                        <div class="input-group">
+                            <input type="email" class="form-control" id="mail" name="mail"placeholder="Email" required [(ngModel)]="newRes.cmpt_EMAIL" [ngModelOptions]="{standalone: true}" #mail="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+                            <div *ngIf="mail.errors && (mail.dirty || mail.touched)" class="alert alert-danger">
+                                <div [hidden]="!mail.errors.required">
+                                Email est obligatoire!
+                                </div>
+                            <div [hidden]="!mail.errors.pattern"> 
+                                Email invalide!!
+                            </div>
+                            </div>
+                        </div>                                            
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label for="tel" class="col-md-12 col-xs-12 control-label">Numéro de telephone*:</label>
+                    <div class="col-md-12 col-xs-12">                                            
+                        <div class="input-group">
+                            <input type="tel" class="form-control" name="tel" id="tel" placeholder="Numero de telephone" minlength="8" maxlength="8" required [(ngModel)]="newRes.cmpt_PHONE" [ngModelOptions]="{standalone: true}" #tel="ngModel"/>
+                            <div *ngIf="tel.errors && (tel.dirty || tel.touched)" class="alert alert-danger">
+                                    <div [hidden]="!tel.errors.required">
+                                    Numéro de telephone est obligatoire!
+                                    </div>
+                                    <div [hidden]="!tel.errors.minlength">
+                                            Numéro de telephone doit composer 8 chiffre!!
+                                          </div>           
+                                </div>
+                        </div>                                            
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                        <label foe="login" class="col-md-12 col-xs-12 control-label">Login*:</label>
+                    <div class="col-md-12 col-xs-12">                                            
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="login" id="login" placeholder="Login" required [(ngModel)]="newRes.cmpt_LOGIN" [ngModelOptions]="{standalone: true}" #login="ngModel"/>
+                            <div *ngIf="login.errors && (login.dirty || login.touched)" class="alert alert-danger">
+                                    <div [hidden]="!login.errors.required">
+                                    Login est obligatoire!
+                                    </div>
+                                </div>
+                        </div>                                            
+                    </div>
+                </div>
+                <div class="form-group">                                        
+                        <label for="pwd" class="col-md-12 col-xs-12 control-label">Mot de passe*:</label>
+                    <div class="col-md-12 col-xs-12">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Mot de passe" required [(ngModel)]="newRes.cmpt_PWD" [ngModelOptions]="{standalone: true}" #pwd="ngModel"/>
+                            <div *ngIf="pwd.errors && (pwd.dirty || pwd.touched)" class="alert alert-danger">
+                                    <div [hidden]="!pwd.errors.required">
+                                    Mot de passe est obligatoire!
+                                    </div>
+                                </div>
+                        </div>            
+                    </div>
+                </div>
+                <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="file" multiple name="pic" id="pic" accept="image/*" (change)="handleFileSelect($event)" required [(ngModel)]="newRes.cmpt_PIC" [ngModelOptions]="{standalone: true}" #pic="ngModel"/>
+                            <label id="upload-photo-label" for="pic">PHOTO</label>
+                        </div>                                            
+                </div>      
+                <div class="form-group">
+                        <div class="col-md-12">
+                <img [src]="url" id="img" height="200">
+                </div></div>
+            </div>
+            <div class="modal-footer">        
+                <button type="reset" class="btn btn-danger pull-left" style="margin-right: 15px;">Annuler</button>                                    
+                <button type="button" class="btn btn-success pull-right" [disabled]="first.errors||last.errors||mail.errors||datenaiss.errors||sexe.errors||tel.errors||login.errors||pwd.errors"
+                 (click)="save();">Envoyer<i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+                <span class="suc" [hidden]="!releveurAdded">Ajout avec succés!</span>
+            </div>
+            </form>
+          </ng-template>
+ <!-- START DATATABLE EXPORT -->
+ <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Liste des responsables</h3>
+        <div class="btn-group pull-right">
+            <button class="btn btn-success" (click)="open(content)">Nouveau Responsable</button>
+        </div>                                    
+        
+    </div>
+    <div class="panel-body">
+        <table id="customers2" class="table datatable">
+            <thead>
+                <tr>
+                        <th>photo</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Sexe</th>
+                        <th>Date de naissance</th>
+                        <th>Numéro de télephone</th>
+                        <th>Email</th>
+                        <th>Date d'ajout</th>
+                        <th>Derniére mise à jour</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let responsable of responsables">
+                        <td>
+                                <a class="gallery-item" href="data:image/jpg;base64,{{ responsable.cmpt_PIC }}" data-gallery>
+                                    <div class="image">                              
+                                            <img src="data:image/jpg;base64,{{ responsable.cmpt_PIC }}" class="img-responsive"/>                                                                                                          
+                                    </div>                              
+                                </a>          
+                            </td>
+                            <td>{{responsable.cmpt_FIRST_NAME}}</td>
+                            <td>{{responsable.cmpt_LAST_NAME}}</td>
+                            <td>{{responsable.cmpt_SEXE}}</td>
+                            <td>{{responsable.cmpt_BIRTH}}</td>
+                            <td>{{responsable.cmpt_PHONE}}</td>
+                            <td>{{responsable.cmpt_EMAIL}}</td>
+                            <td>{{responsable.cmpt_CREDT}}</td>
+                            <td>{{responsable.cmpt_UPDTDT}}</td>
+                    
+                </tr>
+                            
+            </tbody>
+        </table>                                    
+        
+    </div>
+</div>
+<!-- END DATATABLE EXPORT -->   
+<!-- BLUEIMP GALLERY -->
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+</div>      
+    <!-- END BLUEIMP GALLERY -->

@@ -1,0 +1,29 @@
+
+ <!-- START DATATABLE EXPORT -->
+ <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Planning des tournées</h3>                               
+    </div>
+    <div class="panel-body">
+        <table id="customers2" class="table datatable">
+            <thead>
+                <tr>
+                    <th>Tournées/Sous-tournées</th>
+                    <th>Releveur</th>
+                    <th>Date d'affectation</th>
+                    <th>Date prévu de réalisation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tournee of tournees">
+                    <td>{{ tournee.tour_NAME }}</td>
+                    <td> {{ tournee.releveur.cmpt_FIRST_NAME }}  {{ tournee.releveur.cmpt_LAST_NAME }}</td>
+                    <td>{{ tournee.tour_AFFDT}}</td>
+                    <td>{{ tournee.tour_PREVDT }}</td>
+                </tr>        
+            </tbody>
+        </table>                                    
+        
+    </div>
+</div>
+<!-- END DATATABLE EXPORT -->   

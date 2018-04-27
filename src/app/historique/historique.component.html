@@ -1,0 +1,65 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Vider l'historique</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h4>Etes vous sure ?</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="deleteAll()">Oui</button>
+        <button type="button" class="btn btn-danger" (click)="c('Close click')">Non</button>
+    </div>
+  </ng-template>
+ 
+ <!-- START DATATABLE EXPORT -->
+ <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Historique des Chargements/Déchargements</h3>
+        <div class="btn-group pull-right">
+            <button class="btn btn-danger" (click)="open(content)">Vider</button>
+        </div>                                    
+        
+    </div>
+    <div class="panel-body">
+        <table id="customers2" class="table datatable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Tournée</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let operation of operations">
+                    <td>{{ operation.op_DT }}</td>
+                    <td>{{ operation.op_HOUR }}</td>
+                    <td>{{ operation.tournee.tour_NAME }}</td>
+                    <td>{{ operation.op_TYPE }}</td>
+                </tr>
+            </tbody>
+        </table>                                    
+        
+    </div>
+</div>
+<!-- END DATATABLE EXPORT -->   
+<div class="message-box animated fadeIn" data-sound="alert" id="mb-vider">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-sign-out"></span> Se <strong>Déconnecter</strong> ?</div>
+            <div class="mb-content">
+                <p>Vous étes sure?</p>                    
+                <p>Cliquez Oui pour quitter.</p>
+            </div>
+            <div class="mb-footer">
+                <div class="pull-right">
+                    <a href="pages-login.html" class="btn btn-success btn-lg">Oui</a>
+                    <button class="btn btn-default btn-lg mb-control-close">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

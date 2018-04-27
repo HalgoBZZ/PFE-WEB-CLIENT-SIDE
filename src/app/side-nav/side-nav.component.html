@@ -1,0 +1,54 @@
+<div class="page-sidebar">
+  <!-- START X-NAVIGATION -->
+  <ul class="x-navigation">
+      <li class="xn-logo">
+          <a href="#">LOGO</a>
+          <a href="#" class="x-navigation-control"></a>
+      </li>
+      <li class="xn-profile">
+          <a href="#" class="profile-mini">
+              <img src="../../assets/img/users/tof.jpg" alt="John Doe"/>
+          </a>
+          <div class="profile">
+              <div class="profile-image">
+                  <img src="../../assets/img/users/tof.jpg" alt="John Doe"/>
+              </div>
+              <div class="profile-data">
+                  <div class="profile-data-name">Hafedh Baazouzi</div>
+                  <div class="profile-data-title">Java Developer/Web Designer</div>
+              </div>
+              
+          </div>                                                                        
+      </li>
+      <li class="xn-title"></li>
+      <li class="active">
+          <a [routerLink]="['/home', {outlets: {child1: ['dashboard']}}]" skipLocationChange><span class="fa fa-dashboard"></span> <span class="xn-text">Tableau de bord</span></a>                        
+      </li>                    
+      <li class="xn-openable">
+          <a href="#"><span class="fa fa-users"></span> <span class="xn-text">Comptes</span></a>
+          <ul>
+              <li><a [routerLink]="['/home', {outlets: {child1: ['releveurs']}}]" skipLocationChange><span class="fa fa-user" ></span> Releveurs</a></li>
+              <li><a [routerLink]="['/home', {outlets: {child1: ['responsables']}}]" skipLocationChange><span class="fa fa-user"></span> Responsables</a></li>    
+          </ul>
+      </li>
+      <li class="xn-openable">
+          <a href="#"><span class="fa fa fa-list-ul"></span> <span class="xn-text">Tournées</span></a>
+          <ul>
+              <li><a [routerLink]="['/home', {outlets: {child1: ['tourneenoneffectuee']}}]" skipLocationChange>Tournées non affectées</a></li>
+              <li><a [routerLink]="['/home', {outlets: {child1: ['tourneeavalider']}}]" skipLocationChange>Tournées à valider</a></li>
+              <li><a [routerLink]="['/home', {outlets: {child1: ['planifications']}}]" skipLocationChange>Planifications</a></li>
+              <li><a [routerLink]="['/home', {outlets: {child1: ['historique']}}]" skipLocationChange>Historique des chargements/déchargements</a></li>
+          </ul>
+      </li>
+    
+      <li>
+          <a [routerLink]="['/home', {outlets: {child1: ['planning']}}]" skipLocationChange><span class="fa fa-table"></span><span class="xn-text">Planning</span></a>
+      </li>
+                     
+      <li>
+          <a [routerLink]="['/home', {outlets: {child1: ['map']}}]" skipLocationChange><span class="fa fa-map-marker"></span> <span class="xn-text">Maps</span></a>
+      </li>                                
+  </ul>
+<!-- END X-NAVIGATION -->
+</div>
+  <!-- END PAGE SIDEBAR -->
