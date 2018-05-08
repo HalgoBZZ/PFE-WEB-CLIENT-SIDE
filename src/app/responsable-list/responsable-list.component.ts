@@ -94,13 +94,7 @@ export class ResponsableListComponent implements OnInit {
       this.file = <File>event.target.files[0];
       reader.readAsDataURL(this.file); // read file as data url
       reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = reader.result;
-        /*this.releveurForm.get('pic').setValue(/*{
-        filename: file.name,
-        filetype: file.type,
-        value: reader.result.split(',')[1]
-        }this.file);*/
-        
+        this.url = reader.result;       
       }
     }
   }

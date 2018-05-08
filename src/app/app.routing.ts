@@ -16,11 +16,17 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { HeaderComponent } from './header/header.component';
+import { PassforgetComponent } from './passforget/passforget.component';
+import { CodeverificationComponent } from './codeverification/codeverification.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 
 const appRoutes :Routes=[
     { path: '', redirectTo: '/login', pathMatch: 'full'},
     { path: 'login', component: LoginComponent },
+    { path: 'forget', component: PassforgetComponent},
+    { path: 'code', component: CodeverificationComponent},
+    { path: 'changepwd', component: ChangepasswordComponent},
     { path: 'home', component: HomeComponent, children:[
         { path : 'planifications', component : PlanificationComponent, outlet: 'child1' },
         { path : 'historique', component : HistoriqueComponent, outlet: 'child1' },

@@ -4,104 +4,135 @@
           <h3 class="panel-title">Gérer mon Compte</h3>
       </div>
       <div class="panel-body">
-        <form novalidate (ngSubmit)="updateReleveur(releveurup)">
-          <div class="form-group">
-            <label class="col-md-12 col-xs-12 control-label">Nom*:</label>
-            <div class="col-md-12 col-xs-12">                                            
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="releveurup.cmpt_FIRST_NAME"  [ngModelOptions]="{standalone: true}"/>    
-              </div>                                            
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-12 col-xs-12 control-label">Prenom*:</label>
-              <div class="col-md-12 col-xs-12">                                            
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Prenom" [(ngModel)]="releveurup.cmpt_LAST_NAME"  [ngModelOptions]="{standalone: true}" />
-                </div>                                            
-              </div>
-          </div>
-          <div class="form-group">             
-            <label class="col-md-12 col-xs-12 control-label">Date de naissance*:</label>                           
-            <div class="col-md-12 col-xs-12">
-              <div class="input-group">
-                <input type="date" class="form-control datepicker" placeholder="Date de naissance" [(ngModel)]="releveurup.cmpt_BIRTH"  [ngModelOptions]="{standalone: true}">                                            
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-12 col-xs-12 control-label">Sexe*:</label>
-            <div class="col-md-12 col-xs-12">                                            
-              <div class="input-group">
-                <div class="form-check">
-                  <label>
-                    <input name="cmpt_SEXE" value="HOMME" type="radio" class="with-gap" [(ngModel)]="releveurup.cmpt_SEXE" [ngModelOptions]="{standalone: true}">Homme
-                  </label>
-                </div><br/>
-                <div class="form-check">
-                  <label>
-                    <input name="cmpt_SEXE" value="FEMME" type="radio" class="with-gap" [(ngModel)]="releveurup.cmpt_SEXE" [ngModelOptions]="{standalone: true}">Femme
-                  </label>
-                </div>
-              </div>                                            
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-12 col-xs-12 control-label">Email*:</label>
-            <div class="col-md-12 col-xs-12">                                            
-              <div class="input-group">
-                <input type="email" class="form-control" placeholder="Email" [(ngModel)]="releveurup.cmpt_EMAIL"  [ngModelOptions]="{standalone: true}"/>
-              </div>                                            
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-12 col-xs-12 control-label">Numéro de telephone*:</label>
-             <div class="col-md-12 col-xs-12">                                            
-                <div class="input-group">
-                  <input type="tel" class="form-control" placeholder="Numero de telephone" [(ngModel)]="releveurup.cmpt_PHONE"  [ngModelOptions]="{standalone: true}"/>
-                </div>                                            
-              </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-12 col-xs-12 control-label">Login*:</label>
-            <div class="col-md-12 col-xs-12">                                            
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Login" [(ngModel)]="releveurup.cmpt_LOGIN"  [ngModelOptions]="{standalone: true}"/>
-              </div>                                            
-            </div>
-          </div>
-          <div class="form-group">                                        
-            <label class="col-md-12 col-xs-12 control-label">Mot de passe*:</label>
-            <div class="col-md-12 col-xs-12">
-              <div class="input-group">
-                <input type="password" class="form-control" placeholder="Mot de passe" [(ngModel)]="releveurup.cmpt_PWD"  [ngModelOptions]="{standalone: true}"/>
-              </div>            
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-12">
-              <label>Photo:</label><br/>
-              <input type="file" multiple id="file-simple" accept="image/*" (change)="onSelectFile($event)"/>
-              <label id="upload-photo-label" for="file-simple">Parcourir</label>
-            </div>                                            
-          </div>      
-          <div class="form-group">
-            <div class="col-md-12">
-              <img [src]="url" height="200">
-            </div>
-          </div>
-          <div class="form-group">
-              <div class="col-md-12">
-                  <label>Photo:</label>
-                  <input type="file" multiple class="file" data-preview-file-type="any"/>
-              </div>
-              
-          </div>
+          <form #updateForm="ngForm" (ngSubmit)="updateProfile(releveurup)">
           
-          <div class="form-group">                          
-            <button type="reset" class="btn btn-danger pull-left" style="margin-right: 15px;">Annuler</button>                                    
-            <button type="submit" class="btn btn-success pull-right">Envoyer<i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>                
-          </div>        
-        </form>
+          <div class="modal-body" style="width:100%;">
+              <div >
+                  <div class="form-group" style="display: inline-block;margin-right: 100px;">
+                          <label for="firstup" class="col-md-12 col-xs-12 control-label">Nom*:</label>
+                      <div class="col-md-12 col-xs-12">                                            
+                          <div class="input-group">
+                              <input type="text" name="firstup" id="firstup" class="form-control" placeholder="Nom" required [(ngModel)]="releveurup.cmpt_FIRST_NAME"  [ngModelOptions]="{standalone: true}" #firstup="ngModel"/>
+                              <div *ngIf="firstup.errors && (firstup.dirty || firstup.touched)" class="alert alert-danger">
+                                      <div [hidden]="!firstup.errors.required">
+                                      Nom est obligatoire!
+                                      </div>
+                              </div>
+                          </div>                                            
+                      </div>
+                  </div>               
+                  <div class="form-group" style="display: inline-block;">
+                          <label for="last" class="col-md-12 col-xs-12 control-label">Prenom*:</label>
+                      <div class="col-md-12 col-xs-12">                                            
+                          <div class="input-group">
+                              <input type="text" class="form-control" name="lastup" id="lastup" placeholder="Prenom" required [(ngModel)]="releveurup.cmpt_LAST_NAME"  [ngModelOptions]="{standalone: true}" #lastup="ngModel"/>
+                              <div *ngIf="lastup.errors && (lastup.dirty || lastup.touched)" class="alert alert-danger">
+                                      <div [hidden]="!lastup.errors.required">
+                                      Prenom est obligatoire!
+                                      </div>
+                              </div>
+                          </div>                                            
+                      </div>
+                  </div>
+                  </div>
+                  <div>
+                  <div class="form-group" style="display: inline-block;margin-right: 115px;">             
+                          <label for="datenaissup" class="col-md-12 col-xs-12 control-label">Date de naissance*:</label>                           
+                      <div class="col-md-12 col-xs-12">
+                          <div class="input-group">
+                              <input type="date" name="datenaissup" id="datenaissup" class="form-control datepicker" placeholder="Date de naissance" required [(ngModel)]="releveurup.cmpt_BIRTH"  [ngModelOptions]="{standalone: true}" #datenaissup="ngModel"/>                                            
+                              <div *ngIf="datenaissup.errors && (datenaissup.dirty || datenaissup.touched)" class="alert alert-danger">
+                                      <div [hidden]="!datenaissup.errors.required">
+                                      Nom est obligatoire!
+                                      </div>
+                                  </div>
+                          </div>
+                          
+                  </div>
+                  </div>
+                  <div class="form-group" style="display: inline-block;">
+                          <label for="sexe" class="col-md-12 col-xs-12 control-label">Sexe*:</label>
+                      <div class="col-md-12 col-xs-12">                                            
+                          <div class="input-group">
+                                  <select name="sexeup" id="sexeup" class="form-control select" required [(ngModel)]="releveurup.cmpt_SEXE" [ngModelOptions]="{standalone: true}" #sexeup="ngModel">
+                                      <option value="HOMME">Homme</option>
+                                      <option value="FEMME">Femme</option>
+                                   </select> 
+                                   <div *ngIf="sexeup.errors && (sexeup.dirty || sexeup.touched)" class="alert alert-danger">
+                                          <div [hidden]="!sexeup.errors.required">
+                                          Choix de sexe est obligatoire!
+                                          </div>
+                                      </div>  
+                          </div>                                            
+                      </div>
+                  </div>
+                  </div>
+                  <div>
+                  <div class="form-group" style="display: inline-block;margin-right: 100px;">
+                          <label for="emailup" class="col-md-12 col-xs-12 control-label">Email*:</label>
+                      <div class="col-md-12 col-xs-12">                                            
+                          <div class="input-group">
+                              <input type="email" name="emailup" id="emailup" class="form-control" placeholder="Email" required [(ngModel)]="releveurup.cmpt_EMAIL"  [ngModelOptions]="{standalone: true}" #emailup="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+                              <div *ngIf="emailup.errors && (emailup.dirty || emailup.touched)" class="alert alert-danger">
+                                      <div [hidden]="!emailup.errors.required">
+                                      Email est obligatoire!
+                                      </div>
+                                  <div [hidden]="!emailup.errors.pattern"> 
+                                      Email invalide!!
+                                  </div>
+                                  </div>
+                          </div>                                            
+                      </div>
+                  </div>
+                  <div class="form-group" style="display: inline-block;">
+                          <label for="telup" class="col-md-12 col-xs-12 control-label">Numéro de telephone*:</label>
+                      <div class="col-md-12 col-xs-12">                                            
+                          <div class="input-group">
+                              <input type="tel" name="telup" id="telup" class="form-control" placeholder="Numero de telephone" minlength="8" maxlength="8" required  [(ngModel)]="releveurup.cmpt_PHONE"  [ngModelOptions]="{standalone: true}" #telup="ngModel"/>
+                              <div *ngIf="telup.errors && (telup.dirty || telup.touched)" class="alert alert-danger">
+                                      <div [hidden]="!telup.errors.required">
+                                      Numéro de telephone est obligatoire!
+                                      </div>
+                                      <div [hidden]="!telup.errors.minlength">
+                                              Numéro de telephone doit composer 8 chiffre!!
+                                      </div>           
+                                  </div>
+                          </div>                                            
+                      </div>
+                  </div>
+                  </div>
+                  <div>
+                  <div class="form-group" style="display: inline-block;margin-right: 100px;">
+                          <label for="loginup" class="col-md-12 col-xs-12 control-label">Login*:</label>
+                      <div class="col-md-12 col-xs-12">                                            
+                          <div class="input-group">
+                              <input type="text" name="loginup" id="loginup" class="form-control" placeholder="Login" required [(ngModel)]="releveurup.cmpt_LOGIN"  [ngModelOptions]="{standalone: true}" #loginup="ngModel"/>
+                              <div *ngIf="loginup.errors && (loginup.dirty || loginup.touched)" class="alert alert-danger">
+                                      <div [hidden]="!loginup.errors.required">
+                                      Login est obligatoire!
+                                      </div>
+                                  </div>
+                          </div>                                            
+                      </div>
+                  </div>
+                  
+                  <div class="form-group" style="display: inline-block;">
+                          <div class="col-md-12">
+                              <label>Photo:</label><br/>
+                              <input type="file" multiple id="pic" accept="image/*" (change)="handleFileSelectUp($event)"/>
+                              <label id="upload-photo-label" for="pic">Parcourir</label>
+                          </div>                                            
+                  </div> 
+                  </div>     
+                  <div class="form-group">
+                          <div class="col-md-12">
+                  <img [src]="url" height="100">
+                  </div></div>
+              </div>
+              <div class="modal-footer">                   
+                  <button type="reset" class="btn btn-danger pull-left" style="margin-right: 15px;">Annuler</button>                                    
+                  <button type="submit" class="btn btn-success pull-right" [disabled]="firstup.errors||lastup.errors||emailup.errors||datenaissup.errors||sexeup.errors||telup.errors||loginup.errors">Envoyer<i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>                
+              </div>
+              </form>
       </div>
   </div>

@@ -4,6 +4,8 @@ import { FormControl,NgForm, FormGroup, Validators } from "@angular/forms";
 import { Planification } from '../models/planification';
 import { PlanificationService } from '../services/planification.service';
 import { Router } from '@angular/router';
+import { SecteurService } from '../services/secteur.service';
+import { Secteur } from '../models/secteur';
 
 @Component({
   selector: 'app-planification',
@@ -15,27 +17,22 @@ export class PlanificationComponent implements OnInit {
   closeResult: string;
   private planification:Planification;
   private planificationup:Planification;
-  planifications:any;
-  planificationForm:FormGroup;
+  private planifications:any;
+  private secteurs:any;
+  private secteur:Secteur;
 
   constructor(private modalService: NgbModal, 
-    private planificationService: PlanificationService, private router: Router) { 
+    private planificationService: PlanificationService, 
+    private router: Router,private secteurService:SecteurService) { 
 
     }
 
   ngOnInit() {
+    this.getSecteurs();
     this.getPlanifications();
-    //this.compareTwoDates();
-    this.planificationForm = new FormGroup({
-      planif_NAME: new FormControl('', Validators.required),
-      planif_STATE: new FormControl('', Validators.required),
-      planif_HOUR: new FormControl('', Validators.required),
-      planif_DAY:new FormControl('', Validators.required),
-      planif_TYPE :new FormControl('', Validators.required),
-      planif_DEBDT:new FormControl('', Validators.required),
-      planif_ENDDT:new FormControl('', Validators.required),
-      secteur: new FormControl('', Validators.required)
-    })
+    this.secteur=new Secteur();
+    this.planification=new Planification();
+    this.planificationup=new Planification();
   }
 
   public getPlanifications() {
@@ -49,23 +46,23 @@ export class PlanificationComponent implements OnInit {
  
     );
   }
+  public getSecteurs(){
+    this.secteurService.getSecteurs().subscribe(
+      data => {
+        this.secteurs=data;
+      },
+      err =>{
+        console.log(err);
+      }
+    )
+  }
 
   public onSubmit() {
-    if (this.planificationForm.valid) {
-    let newPlanif=new Planification(this.planificationForm.controls['planif_NAME'].value,
-    this.planificationForm.controls['planif_ENDDT'].value,
-    this.planificationForm.controls['planif_DEBDT'].value,
-    this.planificationForm.controls['planif_HOUR'].value,
-    this.planificationForm.controls['planif_DAY'].value,
-    this.planificationForm.controls['planif_TYPE'].value,
-    this.planificationForm.controls['planif_STATE'].value,
-    new Date(), new Date(),
-    this.planificationForm.controls['secteur'].value);
-    this.planificationService.createPlanification(newPlanif);
-
-    this.getPlanifications();
+    //this.getSecteur(this.secteur.sec_ID);
+    this.planification.planif_CREDT=new Date();
+    this.planification.planif_UPDTDT=new Date();
+    this.planificationService.createPlanification(this.planification);
    location.reload
-    }
   }
 
   public updatePlanification(planificationup: Planification):void{
@@ -73,7 +70,6 @@ export class PlanificationComponent implements OnInit {
     this.planificationService.updatePlanification(planificationup);
     this.getPlanifications();
     location.reload();
-    
   }
 
   public deletePlanification(planification: Planification):void{
@@ -84,6 +80,17 @@ export class PlanificationComponent implements OnInit {
       });
   }
 
+  public getSecteur(id:number){
+    this.secteurService.getSecteur(id).subscribe(
+      data => {
+        this.planification.secteur=data;
+      },
+      err =>{
+        console.log(err);
+      }
+    )
+  }
+  
   open(content) {
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -109,12 +116,5 @@ export class PlanificationComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
-  }
-
-  compareTwoDates(){
-    if(new Date(this.planificationForm.controls['fin'].value)<new Date(this.planificationForm.controls['debut'].value)){
-       return false;
-    }
-    return true;
   }
 }

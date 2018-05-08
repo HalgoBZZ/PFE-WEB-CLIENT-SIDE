@@ -2,24 +2,25 @@
         <div class="login-box animated fadeInDown">
             <div class="login-body" style="margin-bottom:200px;">
                 <div class="login-title"><strong>Logo</strong></div>
-                <form  class="form-horizontal">
+                <div class="alert alert-danger" *ngIf="mode==1">Authentification échouée...</div>
+                <form  class="form-horizontal" #f="ngForm">
                 <div class="form-group" style="margin-top: 100px;">
                     <div class="col-md-12">
-                        <input type="text" class="form-control" placeholder="Nom d'utilisateur" />
+                        <input type="text" class="form-control" id="login" name="login" [(ngModel)]="user.cmpt_LOGIN" placeholder="Login" required [ngModelOptions]="{standalone: true}" #login="ngModel" />
                     </div>
                 </div>
                 <div class="form-group" style="margin-top: 20px;">
                     <div class="col-md-12">
-                        <input type="password" class="form-control" placeholder="Mot de passe" />
+                        <input type="password" class="form-control" id="password" [(ngModel)]="user.cmpt_PWD" name="password" placeholder="Mot de passe" [ngModelOptions]="{standalone: true}" #password="ngModel"  />
                     </div>
                 </div>
                 <div class="form-group" style="margin-top: 20px; margin-bottom: 20px;">
                     <div class="col-md-6">
-                        <a [routerLink]="['/home']" class="btn btn-link btn-block">Mot de passe oulié?</a>
+                        <a [routerLink]="['/forget']" class="btn btn-link btn-block">Mot de passe oulié?</a>
                     </div>
                     
                     <div class="col-md-6">
-                        <button (click)="logged()" class="btn btn-info btn-block">Se connecter</button>
+                        <button class="btn btn-info btn-block" (click)="onLogin();">Se connecter</button>
                     </div>
                 </div>
                 </form>

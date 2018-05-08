@@ -40,6 +40,10 @@ import { LoginService } from './services/login.service';
 import { UploadImageService } from './services/upload-image.service';
 import { LoaderService } from './services/loading.service';
 import { HomeComponent } from './home/home.component';
+import { PassforgetComponent } from './passforget/passforget.component';
+import { CodeverificationComponent } from './codeverification/codeverification.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { SecteurService } from './services/secteur.service';
 
 
 
@@ -65,6 +69,9 @@ import { HomeComponent } from './home/home.component';
     ProfileComponent,
     HelpComponent,
     HomeComponent,
+    PassforgetComponent,
+    CodeverificationComponent,
+    ChangepasswordComponent,
   ],
   entryComponents: [],
 
@@ -89,7 +96,8 @@ import { HomeComponent } from './home/home.component';
   TourneeService,
   LoginService,
   UploadImageService,
-  LoaderService
+  LoaderService,
+  SecteurService
 ],
   bootstrap: [AppComponent]
 })

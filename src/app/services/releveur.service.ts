@@ -6,19 +6,24 @@ import 'rxjs/add/observable/throw'
 import "rxjs/add/operator/map";
 import 'rxjs/add/operator/catch';
 import { Releveur } from '../models/releveur';
+import { LoginService } from './login.service';
 
 @Injectable()
 export class ReleveurService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private loginService:LoginService) { }
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private releveursUrl = 'http://localhost:8080/releveurs';
+  private jwtToken=null;
 
   public getReleveurs(): Observable<Releveur[]> {
-    return this.http.get(this.releveursUrl + "/all")
+    this.jwtToken=this.loginService.loadToken();
+    const url = `${this.releveursUrl}/byresponsable/${localStorage.getItem('login')}`;
+    return this.http.get(url)
     .map((res:Response)=> res.json())
     .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
+  
   }
  
  

@@ -1,99 +1,6 @@
    <!--******************************Update form*************************-->
    <ng-template #content3 let-c="close" let-d="dismiss">
-        <form novalidate (ngSubmit)="updatePlanification(planificationup)">
-                <div class="modal-header">
-                  <h4 class="modal-title">Mise à jour d'une Planification</h4>
-                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                        <div class="form-group">
-                                <label class="col-md-12 col-xs-12 control-label">Nom*:</label>
-                                <div class="col-md-12 col-xs-12">                                            
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Nom de planification" [(ngModel)]="planificationup.planif_NAME"  [ngModelOptions]="{standalone: true}"/>   
-                                    </div>                                            
-                                </div>
-                            </div>
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label">Heure*:</label>
-                            <div class="col-md-12 col-xs-12">                                            
-                                <div class="input-group">
-                                    <input type="time" class="form-control" placeholder="Heure" [(ngModel)]="planificationup.planif_HOUR"  [ngModelOptions]="{standalone: true}"/>   
-                                </div>                                            
-                            </div>
-                        </div>
-                
-                       <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label">Jour*:</label>
-                            <div class="col-md-12 col-xs-12">                                            
-                                <div class="input-group">
-                                    <select class="form-control select" [(ngModel)]="planificationup.planif_DAY"  [ngModelOptions]="{standalone: true}">
-                                        <option selected value="LUNDI">Lundi</option>
-                                        <option value="MARDI">Mardi</option>
-                                        <option value="MERCREDI">Mercredi</option>
-                                        <option value="JEUDI">Jeudi</option>
-                                        <option value="VENDREDI">Vendredi</option>
-                                        <option value="SAMEDI">Samedi</option>
-                                        <option value="DIMANCHE">Dimanche</option>
-                                    </select>
-                                    
-                                </div>                                            
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label">Type*:</label>
-                            <div class="col-md-12 col-xs-12">                                            
-                                <div class="input-group">
-                                    <select class="form-control select" [(ngModel)]="planificationup.planif_TYPE"  [ngModelOptions]="{standalone: true}">
-                                        <option selected value="PROCHAIN">Prochain</option>
-                                        <option value="PREMIER_DE_MOIS">Premier de mois</option>
-                                        <option value="CHAQUE_SEMAINE">Chaque semaine</option>
-                                    </select>
-                                    
-                                </div>                                            
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label">Date de debut de planification*:</label>
-                            <div class="col-md-12 col-xs-12">                                            
-                                <div class="input-group">
-                                    <input type="date" class="form-control" placeholder="Date de debut" [(ngModel)]="planificationup.planif_DEBDT"  [ngModelOptions]="{standalone: true}"/>
-                                </div>                                            
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label">Date de fin de planification*:</label>
-                            <div class="col-md-12 col-xs-12">                                            
-                                <div class="input-group">
-                                    <input type="date" class="form-control" placeholder="Date de fin" [(ngModel)]="planificationup.planif_ENDDT"  [ngModelOptions]="{standalone: true}"/>                      
-                                </div>                                            
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-12 col-xs-12 control-label">Secteur*:</label>
-                            <div class="col-md-12 col-xs-12">                                            
-                                <div class="input-group">
-                                    <select class="form-control select" [(ngModel)]="planificationup.secteur"  [ngModelOptions]="{standalone: true}">
-                                        <option selected>secteur1</option>
-                                        <option>secteur2</option>
-                                        <option>secteur3</option>
-                                    </select>
-                                    
-                                </div>                                            
-                            </div>
-                        </div>
-                    </div>
-                <div class="modal-footer">
-                    <button type="reset" class="btn btn-danger pull-left" style="margin-right: 15px;">Annuler</button>                                    
-                    <button type="submit" class="btn btn-success pull-right" [disabled]="!planificationForm.valid || loading">Ajouter<i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>    
-                </div>
-                </form>
-      </ng-template>
-  <!-- **********************************add planification form**********************************-->
-  <ng-template #content let-c="close" let-d="dismiss">
-        <form novalidate [formGroup]="planificationForm" (ngSubmit)="onSubmit()">
+        <form #updateForm="ngForm" (ngSubmit)="updateReleveur(planificationup)">
         <div class="modal-header">
           <h4 class="modal-title">Nouvelle Planification</h4>
           <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -105,10 +12,12 @@
                         <label class="col-md-12 col-xs-12 control-label">Nom*:</label>
                         <div class="col-md-12 col-xs-12">                                            
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Nom de Planification" formControlName="planif_NAME"/>
-                                <span *ngIf="planificationForm.get('planif_NAME').invalid && planificationForm.get('planif_NAME').touched" class="err">
-                                        *Champ obligatoire.
-                                </span>
+                                <input type="text" name="nom" id="nom" class="form-control" placeholder="Nom de Planification" required [(ngModel)]="planificationup.planif_NAME" [ngModelOptions]="{standalone: true}" #nom="ngModel"/>
+                                <div *ngIf="nom.errors && (nom.dirty || nom.touched)" class="alert alert-danger">
+                                        <div [hidden]="!nom.errors.required">
+                                        Champ obligatoire!
+                                        </div>
+                                    </div>
                             </div>                                            
                         </div>
                     </div>
@@ -116,10 +25,12 @@
                     <label class="col-md-12 col-xs-12 control-label">Heure*:</label>
                     <div class="col-md-12 col-xs-12">                                            
                         <div class="input-group">
-                            <input type="time" class="form-control" placeholder="Heure" formControlName="planif_HOUR"/>
-                            <span *ngIf="planificationForm.get('planif_HOUR').invalid && planificationForm.get('planif_HOUR').touched" class="err">
-                                    *Champ obligatoire.
-                            </span>
+                            <input type="time" name="heure" id="heure" class="form-control" placeholder="Heure" required [(ngModel)]="planificationup.planif_HOUR" [ngModelOptions]="{standalone:true}" #heure="ngModel"/>
+                            <div *ngIf="heure.errors && (heure.dirty || heure.touched)" class="alert alert-danger">
+                                    <div [hidden]="!heure.errors.required">
+                                    Champ obligatoire!
+                                    </div>
+                                </div>
                         </div>                                            
                     </div>
                 </div>
@@ -128,7 +39,7 @@
                     <label class="col-md-12 col-xs-12 control-label">Jour*:</label>
                     <div class="col-md-12 col-xs-12">                                            
                         <div class="input-group">
-                            <select class="form-control select" formControlName="planif_DAY">
+                            <select name="jour" class="form-control select" id="jour" required [(ngModel)]="planificationup.planif_DAY" [ngModelOptions]="{standalone:true}" #jour="ngModel">
                                 <option selected value="LUNDI">Lundi</option>
                                 <option value="MARDI">Mardi</option>
                                 <option value="MERCREDI">Mercredi</option>
@@ -137,7 +48,11 @@
                                 <option value="SAMEDI">Samedi</option>
                                 <option value="DIMANCHE">Dimanche</option>
                             </select>
-                            
+                            <div *ngIf="jour.errors && (jour.dirty || jour.touched)" class="alert alert-danger">
+                                    <div [hidden]="!jour.errors.required">
+                                    Champ obligatoire!
+                                    </div>
+                                </div>
                         </div>                                            
                     </div>
                 </div>
@@ -145,12 +60,16 @@
                     <label class="col-md-12 col-xs-12 control-label">Type*:</label>
                     <div class="col-md-12 col-xs-12">                                            
                         <div class="input-group">
-                            <select class="form-control select" formControlName="planif_TYPE">
+                            <select class="form-control select" name="type" id="type" required [(ngModel)]="planificationup.planif_TYPE" [ngModelOptions]="{standalone:true}" #type="ngModel">
                                 <option selected value="PROCHAIN">Prochain</option>
                                 <option value="PREMIER_DE_MOIS">Premier de mois</option>
                                 <option value="CHAQUE_SEMAINE">Chaque semaine</option>
                             </select>
-                            
+                            <div *ngIf="type.errors && (type.dirty || type.touched)" class="alert alert-danger">
+                                    <div [hidden]="!type.errors.required">
+                                    Champ obligatoire!
+                                    </div>
+                                </div>
                         </div>                                            
                     </div>
                 </div>
@@ -158,10 +77,12 @@
                     <label class="col-md-12 col-xs-12 control-label">Date de debut de planification*:</label>
                     <div class="col-md-12 col-xs-12">                                            
                         <div class="input-group">
-                            <input type="date" class="form-control" placeholder="Date de debut" formControlName="planif_DEBDT"/>
-                            <span *ngIf="planificationForm.get('planif_DEBDT').invalid && planificationForm.get('planif_DEBDT').touched" class="err">
-                                    *Champ obligatoire.
-                            </span>
+                            <input type="date" name="debut" id="debut" class="form-control" placeholder="Date de debut" required [(ngModel)]="planificationup.planif_DEBDT" [ngModelOptions]="{standalone:true}" #debut="ngModel"/>
+                            <div *ngIf="debut.errors && (debut.dirty || debut.touched)" class="alert alert-danger">
+                                    <div [hidden]="!debut.errors.required">
+                                    Champ obligatoire!
+                                    </div>
+                                </div>
                         </div>                                            
                     </div>
                 </div>
@@ -169,11 +90,12 @@
                     <label class="col-md-12 col-xs-12 control-label">Date de fin de planification*:</label>
                     <div class="col-md-12 col-xs-12">                                            
                         <div class="input-group">
-                            <input type="date" class="form-control" placeholder="Date de fin" formControlName="planif_ENDDT"/>
-                            <span *ngIf="planificationForm.get('planif_ENDDT').invalid && planificationForm.get('planif_ENDDT').touched" class="err">
-                                    *Champ obligatoire ou date non valide.
-                            </span>
-              
+                            <input type="date" name="fin" id="fin" class="form-control" placeholder="Date de fin" required [(ngModel)]="planificationup.planif_ENDDT" [ngModelOptions]="{standalone:true}" #fin="ngModel" />
+                            <div *ngIf="fin.errors && (fin.dirty || fin.touched)" class="alert alert-danger">
+                                    <div [hidden]="!fin.errors.required">
+                                    Champ obligatoire!
+                                    </div>
+                                </div>
                         </div>                                            
                     </div>
                 </div>
@@ -181,19 +103,130 @@
                     <label class="col-md-12 col-xs-12 control-label">Secteur*:</label>
                     <div class="col-md-12 col-xs-12">                                            
                         <div class="input-group">
-                            <select class="form-control select" formControlName="secteur">
-                                <option selected>secteur1</option>
-                                <option>secteur2</option>
-                                <option>secteur3</option>
+                            <select *ngFor="let secteur of secteurs" name="secteur" id="secteur" class="form-control select" required [(ngModel)]="planificationup.secteur" [ngModelOptions]="{standalone:true}" #secteur="ngModel">
+                                <option value="secteur">{{secteur.sec_NAME}}</option>
                             </select>
-                            
+                            <div *ngIf="secteur.errors && (secteur.dirty || secteur.touched)" class="alert alert-danger">
+                                    <div [hidden]="!secteur.errors.required">
+                                    Champ obligatoire!
+                                    </div>
+                                </div>
                         </div>                                            
                     </div>
                 </div>
             </div>
         <div class="modal-footer">
             <button type="reset" class="btn btn-danger pull-left" style="margin-right: 15px;">Annuler</button>                                    
-            <button type="submit" class="btn btn-success pull-right" [disabled]="!planificationForm.valid || loading">Ajouter<i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>    
+            <button type="submit" class="btn btn-success pull-right" [disabled]="nom.errors||heure.errors||debut.errors||fin.errors||type.errors||secteur.errors||jour.errors">Ajouter</button>    
+        </div>
+        </form>
+      </ng-template>
+  <!-- **********************************add planification form**********************************-->
+  <ng-template #content let-c="close" let-d="dismiss">
+        <form #addingForm="ngForm">
+        <div class="modal-header">
+          <h4 class="modal-title">Nouvelle Planification</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <div class="form-group">
+                        <label class="col-md-12 col-xs-12 control-label">Nom*:</label>
+                        <div class="col-md-12 col-xs-12">                                            
+                            <div class="input-group">
+                                <input type="text" name="nom" id="nom" class="form-control" placeholder="Nom de Planification" required [(ngModel)]="planification.planif_NAME" [ngModelOptions]="{standalone: true}" #nom="ngModel"/>
+                                <div *ngIf="nom.errors && (nom.dirty || nom.touched)" class="alert alert-danger">
+                                        <div [hidden]="!nom.errors.required">
+                                        Champ obligatoire!
+                                        </div>
+                                    </div>
+                            </div>                                            
+                        </div>
+                    </div>        
+               <div class="form-group">
+                    <label class="col-md-12 col-xs-12 control-label">Jour*:</label>
+                    <div class="col-md-12 col-xs-12">                                            
+                        <div class="input-group">
+                            <select name="jour" class="form-control select" id="jour" required [(ngModel)]="planification.planif_DAY" [ngModelOptions]="{standalone:true}" #jour="ngModel">
+                                <option selected value="LUNDI">Lundi</option>
+                                <option value="MARDI">Mardi</option>
+                                <option value="MERCREDI">Mercredi</option>
+                                <option value="JEUDI">Jeudi</option>
+                                <option value="VENDREDI">Vendredi</option>
+                                <option value="SAMEDI">Samedi</option>
+                                <option value="DIMANCHE">Dimanche</option>
+                            </select>
+                            <div *ngIf="jour.errors && (jour.dirty || jour.touched)" class="alert alert-danger">
+                                    <div [hidden]="!jour.errors.required">
+                                    Champ obligatoire!
+                                    </div>
+                                </div>
+                        </div>                                            
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12 col-xs-12 control-label">Type*:</label>
+                    <div class="col-md-12 col-xs-12">                                            
+                        <div class="input-group">
+                            <select class="form-control select" name="type" id="type" required [(ngModel)]="planification.planif_TYPE" [ngModelOptions]="{standalone:true}" #type="ngModel">
+                                <option selected value="PROCHAIN">Prochain</option>
+                                <option value="PREMIER_DE_MOIS">Premier de mois</option>
+                                <option value="CHAQUE_SEMAINE">Chaque semaine</option>
+                            </select>
+                            <div *ngIf="type.errors && (type.dirty || type.touched)" class="alert alert-danger">
+                                    <div [hidden]="!type.errors.required">
+                                    Champ obligatoire!
+                                    </div>
+                                </div>
+                        </div>                                            
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12 col-xs-12 control-label">Date de debut de planification*:</label>
+                    <div class="col-md-12 col-xs-12">                                            
+                        <div class="input-group">
+                            <input type="datetime-local" name="debut" id="debut" class="form-control" placeholder="Date de debut" required [(ngModel)]="planification.planif_DEBDT" [ngModelOptions]="{standalone:true}" #debut="ngModel"/>
+                            <div *ngIf="debut.errors && (debut.dirty || debut.touched)" class="alert alert-danger">
+                                    <div [hidden]="!debut.errors.required">
+                                    Champ obligatoire!
+                                    </div>
+                                </div>
+                        </div>                                            
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12 col-xs-12 control-label">Date de fin de planification*:</label>
+                    <div class="col-md-12 col-xs-12">                                            
+                        <div class="input-group">
+                            <input type="datetime-local" name="fin" id="fin" class="form-control" placeholder="Date de fin" required [(ngModel)]="planification.planif_ENDDT" [ngModelOptions]="{standalone:true}" #fin="ngModel" />
+                            <div *ngIf="fin.errors && (fin.dirty || fin.touched)" class="alert alert-danger">
+                                    <div [hidden]="!fin.errors.required">
+                                    Champ obligatoire!
+                                    </div>
+                                </div>
+                        </div>                                            
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12 col-xs-12 control-label">Secteur*:</label>
+                    <div class="col-md-12 col-xs-12">                                            
+                        <div class="input-group">
+                            <select name="secteur" id="secteur" class="form-control select" required [(ngModel)]="planification.secteur" [ngModelOptions]="{standalone:true}" #secteur="ngModel">
+                                <option *ngFor="let sect of secteurs" [ngValue]="sect">{{sect.sec_NAME}}</option>
+                            </select>
+                            <div *ngIf="secteur.errors && (secteur.dirty || secteur.touched)" class="alert alert-danger">
+                                    <div [hidden]="!secteur.errors.required">
+                                    Champ obligatoire!
+                                    </div>
+                                </div>
+                        </div>                                            
+                    </div>
+                </div>
+            </div>
+        <div class="modal-footer">
+            <button type="reset" class="btn btn-danger pull-left" style="margin-right: 15px;">Annuler</button>                                    
+            <button (click)="onSubmit();" class="btn btn-success pull-right" [disabled]="nom.errors||debut.errors||fin.errors||type.errors||secteur.errors||jour.errors">Ajouter</button>    
         </div>
         </form>
       </ng-template>
@@ -213,7 +246,6 @@
                 <tr>
                     <th>Nom</th>
                     <th>Etat</th>
-                    <th>Heure</th>
                     <th>Jour</th>
                     <th>Type</th>
                     <th>Date de debut</th>
@@ -223,15 +255,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let planification of planifications">
-                    <td>{{ planification.planif_NAME }}</td>
-                    <td>{{ planification.planif_STATE }}</td>
-                    <td>{{ planification.planif_HOUR }}</td>
-                    <td>{{ planification.planif_DAY }}</td>
-                    <td>{{ planification.planif_TYPE }}</td>
-                    <td>{{ planification.planif_DEBDT }}</td>
-                    <td>{{ planification.planif_ENDDT }}</td>
-                    <td>{{ planification.secteur.sec_NAME }}</td>
+                <tr *ngFor="let planificat of planifications">
+                    <td>{{ planificat.planif_NAME }}</td>
+                    <td>{{ planificat.planif_STATE }}</td>
+                    <td>{{ planificat.planif_DAY }}</td>
+                    <td>{{ planificat.planif_TYPE }}</td>
+                    <td>{{ planificat.planif_DEBDT }}</td>
+                    <td>{{ planificat.planif_ENDDT }}</td>
+                    <td>{{ planificat.secteur.sec_NAME }}</td>
                     <td>
                         <button class="btn btn-default btn-rounded btn-sm" (click)="openforUpdate(content3,planfication)"><span class="fa fa-pencil"></span></button>
                         <button class="btn btn-danger btn-rounded btn-sm" (click)="deleteReleveur(planification)"><span class="fa fa-times"></span></button>

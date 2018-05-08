@@ -10,7 +10,7 @@
 .inputfile + label:hover {
     background-color: red;
 }
-#file-simple {
+#pic {
     height: 0;
     width: 0;
 }
@@ -27,4 +27,7 @@
 }
 .err{
     color: red;
+}
+.suc{
+    color: springgreen;
 }

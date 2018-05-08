@@ -10,19 +10,11 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   private loggedIn=false;
-  constructor(private loginService:LoginService, private router:Router) { }
+  constructor(public loginService:LoginService, private router:Router) { }
 
   logout(){
-    this.loginService.logout().subscribe(
-      res => {
-        location.reload();
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    this.router.navigate(['/']);
-
+    this.loginService.logout();
+    this.router.navigateByUrl('/login');
   }
 
   ngOnInit() {

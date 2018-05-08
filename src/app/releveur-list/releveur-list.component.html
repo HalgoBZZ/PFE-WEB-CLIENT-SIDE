@@ -99,7 +99,7 @@
         </div>
         
         <div class="form-group">
-                <label foe="login" class="col-md-12 col-xs-12 control-label">Login*:</label>
+                <label for="login" class="col-md-12 col-xs-12 control-label">Login*:</label>
             <div class="col-md-12 col-xs-12">                                            
                 <div class="input-group">
                     <input type="text" class="form-control" name="login" id="login" placeholder="Login" required [(ngModel)]="newRel.cmpt_LOGIN" [ngModelOptions]="{standalone: true}" #login="ngModel"/>
@@ -255,19 +255,6 @@
                         </div>                                            
                     </div>
                 </div>
-                <div class="form-group">                                        
-                        <label for="pwdup" class="col-md-12 col-xs-12 control-label">Mot de passe*:</label>
-                    <div class="col-md-12 col-xs-12">
-                        <div class="input-group">
-                            <input type="password" name="pwdup" id="pwdup" class="form-control" placeholder="Mot de passe" required [(ngModel)]="releveurup.cmpt_PWD"  [ngModelOptions]="{standalone: true}" #pwdup="ngModel"/>
-                            <div *ngIf="pwdup.errors && (pwdup.dirty || pwdup.touched)" class="alert alert-danger">
-                                    <div [hidden]="!pwdup.errors.required">
-                                    Login est obligatoire!
-                                    </div>
-                                </div>
-                        </div>            
-                    </div>
-                </div>
                 
                 <div class="form-group">
                         <div class="col-md-12">
@@ -283,7 +270,7 @@
             </div>
             <div class="modal-footer">                   
                 <button type="reset" class="btn btn-danger pull-left" style="margin-right: 15px;">Annuler</button>                                    
-                <button type="submit" class="btn btn-success pull-right" [disabled]="firstup.errors||lastup.errors||emailup.errors||datenaissup.errors||sexeup.errors||telup.errors||loginup.errors||pwdup.errors">Envoyer<i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>                
+                <button type="submit" class="btn btn-success pull-right" [disabled]="firstup.errors||lastup.errors||emailup.errors||datenaissup.errors||sexeup.errors||telup.errors||loginup.errors">Envoyer<i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>                
             </div>
             </form>
       </ng-template>
@@ -310,7 +297,6 @@
                     <th>Numéro de télephone</th>
                     <th>Email</th>
                     <th>Login</th>
-                    <th>Mot de passe</th>
                     <th>Date d'ajout</th>
                     <th>Derniére mise à jour</th>
                     <th>Action</th>
@@ -334,7 +320,6 @@
                     <td>{{releveur.cmpt_PHONE}}</td>
                     <td>{{releveur.cmpt_EMAIL}}</td>
                     <td>{{releveur.cmpt_LOGIN}}</td>
-                    <td>{{releveur.cmpt_PWD}}</td>
                     <td>{{releveur.cmpt_CREDT}}</td>
                     <td>{{releveur.cmpt_UPDTDT}}</td>
                     <td>

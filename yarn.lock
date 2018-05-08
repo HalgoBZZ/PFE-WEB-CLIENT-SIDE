@@ -175,6 +175,12 @@
   dependencies:
     tslib "^1.7.1"
 
+"@auth0/angular-jwt@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@auth0/angular-jwt/-/angular-jwt-1.1.0.tgz#ceb6b1eed4fb29812a435da78b420ca6eac81009"
+  dependencies:
+    url "^0.11.0"
+
 "@ng-bootstrap/ng-bootstrap@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-1.0.4.tgz#8acdf57e4250cd86d7e932af194cd34f38e27001"
@@ -384,6 +390,10 @@ angular-draggable-droppable@^2.0.0:
 angular-resizable-element@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/angular-resizable-element/-/angular-resizable-element-2.0.0.tgz#10a437cce317e459e07c3189519ef395e6b86130"
+
+angular2-jwt@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/angular2-jwt/-/angular2-jwt-0.2.3.tgz#54efdda3ceedba85f6a37b165f22ac22b8adf021"
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -3979,6 +3989,12 @@ jsprim@^1.2.2:
     pako "~1.0.2"
     readable-stream "~2.0.6"
 
+jwt@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/jwt/-/jwt-0.2.0.tgz#4c9ad46bc84bfeaf91556ecce7c57aa578cbc8b8"
+  dependencies:
+    node-base64 "0.0.1"
+
 karma-chrome-launcher@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/karma-chrome-launcher/-/karma-chrome-launcher-2.2.0.tgz#cf1b9d07136cc18fe239327d24654c3dbc368acf"
@@ -4633,6 +4649,10 @@ no-case@^2.2.0:
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
   dependencies:
     lower-case "^1.1.1"
+
+node-base64@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/node-base64/-/node-base64-0.0.1.tgz#ee3e095f97e9f4d72fb3dea98bcb2d25c8716b03"
 
 node-forge@0.7.1:
   version "0.7.1"

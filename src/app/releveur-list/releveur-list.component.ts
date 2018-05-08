@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Responsable } from '../models/responsable';
 import { UploadImageService } from '../services/upload-image.service';
 import { LoaderService } from '../services/loading.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-releveur-list',
@@ -29,11 +30,14 @@ export class ReleveurListComponent implements OnInit {
    private valeur:any;
   constructor(private modalService: NgbModal,
     private releveurService: ReleveurService, 
+    private loginService:LoginService,
     private router:Router, private uploadImageService:UploadImageService, private loaderService : LoaderService) { 
     }
 
   ngOnInit() {
+    this.responsable=new Responsable();
     this.newRel=new Releveur();
+    this.getResponsable();
     this
       .loaderService
       .status
@@ -47,15 +51,31 @@ export class ReleveurListComponent implements OnInit {
   save(){
     this.newRel.cmpt_CREDT=new Date();
     this.newRel.cmpt_UPDTDT=new Date();
+    this.newRel.responsable=this.responsable;
+    console.log(this.responsable);
     this.releveurService.createReleveur(this.newRel);
     location.reload();
   }
+
   open(content) {
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  public getResponsable(){
+    this.loginService.getUserByLogin(localStorage.getItem('login'))
+    .subscribe(
+      data => {
+        this.responsable = data;
+      },
+      err => {
+        console.log(err);
+      }
+ 
+    );
   }
 
   openforUpdate(content,rel:Releveur) {
@@ -83,9 +103,10 @@ export class ReleveurListComponent implements OnInit {
   }
 
   getReleveurs() {
-    this.releveurService.getReleveurs().subscribe(
-      releveurs => {
-        this.releveurs = releveurs;
+    this.releveurService.getReleveurs()
+    .subscribe(
+      data => {
+        this.releveurs = data;
       },
       err => {
         console.log(err);
@@ -93,6 +114,8 @@ export class ReleveurListComponent implements OnInit {
  
     );
   }
+
+  
 
   deleteReleveur(releveur:Releveur):void{
     this.releveurService.deleteReleveur(releveur).subscribe(

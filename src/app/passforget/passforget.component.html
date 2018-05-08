@@ -1,0 +1,42 @@
+<div class="login-container lightmode">
+    <div class="login-box animated fadeInDown">
+        <div class="login-body" style="margin-bottom:225px;">
+            <div class="login-title"><strong>Logo</strong></div>
+            <div class="alert alert-danger" *ngIf="mode==1">Vérifier vos données...</div>
+            <form  class="form-horizontal" #f="ngForm">
+            <div class="form-group" style="margin-top: 100px;">
+                <div class="col-md-12">
+                    <input type="text" class="form-control" id="login" name="login" [(ngModel)]="pass.cmpt_LOGIN" placeholder="Login" required [ngModelOptions]="{standalone: true}" #login="ngModel" />
+                    <div *ngIf="login.errors && (login.dirty || login.touched)" class="alert alert-danger">
+                        <div [hidden]="!login.errors.required">
+                        Login est obligatoire!
+                        </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="form-group" style="margin-top: 20px;">
+                <div class="col-md-12">
+                    <input type="email" class="form-control" id="email" [(ngModel)]="pass.cmpt_EMAIL" name="email" placeholder="Email" [ngModelOptions]="{standalone: true}" #email="ngModel"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+                    <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
+                        <div [hidden]="!email.errors.required">
+                        Email est obligatoire!
+                        </div>
+                    <div [hidden]="!email.errors.pattern"> 
+                        Email invalide!!
+                    </div>
+                  </div>
+            </div>
+            </div>
+            <div class="form-group" style="margin-top: 20px; margin-bottom: 20px;">
+                
+                <div  style="display: inline-block; width:30%;margin-left: 15px; margin-right: 15px;">
+                    <button class="btn btn-danger btn-block" [routerLink]="['/login']">Retour</button>                  
+                </div>
+                <div  style="display: inline-block; width:30%;">
+                    <button class="btn btn-info btn-block" (click)="sendEmail();" [disabled]="login.errors||email.errors">Envoyer</button>
+                </div>
+            </div>
+            </form>
+        </div> 
+    </div>
+</div>
