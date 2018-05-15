@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';  
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/throw'
 import "rxjs/add/operator/map";
@@ -8,6 +8,10 @@ import 'rxjs/add/operator/catch';
 import { Releveur } from '../models/releveur';
 import { LoginService } from './login.service';
 
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable()
 export class ReleveurService {
 
@@ -16,14 +20,14 @@ export class ReleveurService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private releveursUrl = 'http://localhost:8080/releveurs';
   private jwtToken=null;
-
+ 
   public getReleveurs(): Observable<Releveur[]> {
     this.jwtToken=this.loginService.loadToken();
+    this.headers.append("Authorization", `JWT ${this.jwtToken}`);
     const url = `${this.releveursUrl}/byresponsable/${localStorage.getItem('login')}`;
-    return this.http.get(url)
+    return this.http.get(url,{ headers: this.headers })
     .map((res:Response)=> res.json())
     .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
-  
   }
  
  
@@ -54,9 +58,10 @@ export class ReleveurService {
   }
  
   public deleteReleveur(releveur: Releveur) {
+    this.jwtToken=this.loginService.loadToken();
+    this.headers.append("Authorization", `JWT ${this.jwtToken}`);
     const url = `${this.releveursUrl}/delete/${releveur.cmpt_ID}`;
-    return this.http.delete(url);
-      
+    return this.http.delete(url, { headers: this.headers });    
   }
  
   private handleError(error: any): Promise<any> {

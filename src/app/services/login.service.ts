@@ -13,6 +13,7 @@ export class LoginService {
   private jwtToken=null;
   private roles:Array<any>;
   private url='http://localhost:8080/responsables';
+  private cmptUrl='http://localhost:8080/comptes';
   
   constructor(private http: HttpClient, private http2:Http) { }
 
@@ -24,7 +25,11 @@ export class LoginService {
     this.jwtToken=jwt;
     localStorage.setItem('token',jwt);
     let jwtHelper=new JwtHelperService();
-    this.roles=jwtHelper.decodeToken(this.jwtToken).roles;
+    this.roles=jwtHelper.decodeToken(jwt).roles
+  }
+
+  getRoles(jwt:string, roles:Array<any>){
+    
   }
 
   loadToken(){
@@ -34,7 +39,14 @@ export class LoginService {
   getToken(){
     return this.jwtToken;
   }
-  
+
+  isRes(login:string):Observable<boolean>{
+    const url1 = `${this.cmptUrl}/isresponsable/${login}`;
+    return this.http2.get(url1)
+    .map((res:Response)=> res.json())
+    .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
+  }
+
   isResponsable(){
     for(let r of this.roles){
       if(r.authority=="RESPONSABLE")
@@ -45,7 +57,6 @@ export class LoginService {
     }
   }
 
- 
   getUserByLogin(login:string): Observable<Responsable> {
     const url1 = `${this.url}/getbylogin/${login}`;
     return this.http2.get(url1)
@@ -59,15 +70,18 @@ export class LoginService {
     .map((res:Response)=> res.text())
     .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
   }
-getUserByEmail(login:string, email:string):Observable<Responsable>{
-  const url1=`${this.url}/getbyemail/${login}/${email}`;
-  return this.http2.get(url1)
-    .map((res:Response)=> res.json())
-    .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
-}
+  getUserByEmail(login:string, email:string):Observable<Responsable>{
+    const url1=`${this.url}/getbyemail/${login}/${email}`;
+    return this.http2.get(url1)
+      .map((res:Response)=> res.json())
+      .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
+  }
   logout(){
     this.jwtToken=null;
     localStorage.removeItem('token');
+    localStorage.removeItem('login');
+    localStorage.removeItem('role');
+    localStorage.removeItem('isLoggedin');
   }
 
   private handleError(error: any): Promise<any> {

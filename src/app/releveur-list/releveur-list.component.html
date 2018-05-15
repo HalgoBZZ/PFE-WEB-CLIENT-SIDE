@@ -53,6 +53,7 @@
             <div class="col-md-12 col-xs-12">                                            
                 <div class="input-group">
                         <select class="form-control select" name="sexe" id="sexe" placeholder="Selectionner sexe" required [(ngModel)]="newRel.cmpt_SEXE"  [ngModelOptions]="{standalone: true}" #sexe="ngModel">
+                            <option value="" disabled selected>Choisir le genre</option>
                             <option value="HOMME">Homme</option>
                             <option value="FEMME">Femme</option>
                         </select> 

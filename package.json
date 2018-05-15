@@ -29,6 +29,7 @@
     "@types/date-fns": "^2.6.0",
     "@types/googlemaps": "^3.30.8",
     "angular-calendar": "^0.23.7",
+    "angular-webstorage-service": "^1.0.2",
     "angular2-jwt": "^0.2.3",
     "bootstrap": "^4.0.0",
     "core-js": "^2.4.1",

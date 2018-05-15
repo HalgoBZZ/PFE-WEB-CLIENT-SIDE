@@ -15,146 +15,118 @@
   <!--***********************************choosing releveur-->
   <ng-template #content4 let-c="close" let-d="dismiss">
         <div class="modal-header">
-          <h4 class="modal-title">Choix de releveur</h4>
+          <h4 class="modal-title">Affecter la tournee à un releveur</h4>
           <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>liste des releveurs</p>
+          <form #affectForm="ngForm">
+              <div class="form-group">
+                  <input type="date" class="form-control" name="prdate" id="prdate" required placeholder="Date prévu de réalisation" [(ngModel)]="tournee.tour_PREVDT" [ngModelOptions]="{standalone:true}" #prdate="ngModel">
+                  <div *ngIf="prdate.errors && (prdate.dirty || prdate.touched)" class="alert alert-danger">
+                        <div [hidden]="!prdate.errors.required">
+                        Champ est obligatoire!
+                        </div>
+                    </div>
+                </div>
+              <div class="form-group">
+                <select name="releveur" id="releveur" (change)="show($event,releveur.value)" class="form-control select" [(ngModel)]="tournee.releveur" required [ngModelOptions]="{standalone:true}" #releveur="ngModel">
+                    <option disabled selected>Choix de releveur</option>    
+                    <option *ngFor="let releveursel of releveurs" [ngValue]="releveursel" [selected]="releveursel" >{{releveursel.cmpt_FIRST_NAME}} {{releveursel.cmpt_LAST_NAME}}</option>
+                </select>
+                <div *ngIf="releveur.errors && (releveur.dirty || releveur.touched)" class="alert alert-danger">
+                        <div [hidden]="!releveur.errors.required">
+                        Champ est obligatoire!
+                        </div>
+                    </div>  
+                </div>
+                <div class="form-group">
+                <div *ngIf="isSelected" classe="reldetails">
+                        <div style="display: block;" class="image">
+                              <img src="data:image/jpg;base64,{{ relShow.cmpt_PIC }}"/>
+                        </div>
+                        <div style="display: block;" class="informations">
+                            <h4><span class="fa fa-user" style="margin-right:10px;"></span>{{relShow.cmpt_FIRST_NAME}} {{relShow.cmpt_LAST_NAME}}</h4>
+                            <h4><span class="fa fa-phone" style="margin-right:10px;"></span>{{relShow.cmpt_PHONE}}</h4>
+                            <h4><span class="fa fa-envelope" style="margin-right:10px;"></span>{{relShow.cmpt_EMAIL}}</h4>
+                        </div>
+                </div>
+                </div>
+          </form>
+         
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Fermer</button>
+          <button type="button" class="btn btn-success" (click)="affecter();" [disabled]="releveur.errors||prdate.errors">Affecter</button>
         </div>
       </ng-template>
+      <!-- START DATATABLE EXPORT -->
+      <div class="btn-group pull-left">
+            <button class="btn btn-success" (click)="open(content)">Chargement</button>
+        </div><br><br>
+ <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Liste des tournees non affectées</h3>
+                                        
+        
+    </div>
+    <div class="panel-body">
+        <table id="customers2" class="table datatable">
+            <thead>
+                <tr>
+                    <th *ngIf="!test">Parent</th>
+                    <th>Code</th>
+                    <th>Nom</th>
+                    <th>Commentaire</th>
+                    <th>Date de création</th>
+                    <th>Date de mise à jour</th>
+                    <th>Etat</th>
+                    <th>Date d'affectation</th>
+                    <th>Date prévu de réalisation</th>
+                    <th>Secteur</th>
+                    <th>Releveur</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tournee of nonaffecter">                    
+                    <td><span *ngIf="tournee.pere!=null">{{tournee.pere.tour_NAME}}</span></td>
+                    <td>{{tournee.tour_CODE}}</td>
+                    <td>{{tournee.tour_NAME}}</td>
+                    <td>{{tournee.tour_COMMENT}}</td>
+                    <td>{{tournee.tour_CREDT}}</td>
+                    <td>{{tournee.tour_UPDTDT}}</td>
+                    <td>{{tournee.tour_STATE}}</td>
+                    <td>{{tournee.tour_AFFDT}}</td>
+                    <td>{{tournee.tour_PREVDT}}</td>
+                    <td>{{tournee.secteur.sec_NAME}}</td>
+                    <td>
+                        <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4,tournee)"><span class="fa fa-plus-circle" title="Affecter"></span></button>
+                    </td>
+                    <td> <button class="btn btn-default btn-rounded btn-sm" (click)="enreg(tournee)" [routerLink]="['/home', {outlets: {child1: ['pdl']}}]" skipLocationChange><span class="fa fa-info-circle" title="Details"></span></button></td>
+                    </tr>                              
+            </tbody>
+        </table>                                    
+        
+    </div>
+</div>
 <!-- START DEFAULT DATATABLE -->
- <div class="btn-group pull-left">
-    <button class="btn btn-success" (click)="open(content)">Chargement</button>
-</div><br><br>   
+ <!--
+<div *ngFor="let tournee of nonaffecter"></div>   
  <div class="panel panel-default">
         <div class="panel-heading">                                
-            <h3 class="panel-title">Tournée T1</h3>
+            <h3 class="panel-title">{{tournee.pere}}</h3>
             <ul class="panel-controls">
-                    <li> <button class="btn btn-primary">Affecter</button></li>
                 <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
-                <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
-                
             </ul>                                
         </div>
         <div class="panel-body">
-            <table class="table datatable">
-                <thead>
-                    <tr>
-                        <th>Reference PDL</th>
-                        <th>Adresse</th>
-                        <th>Proprietaire</th>
-                        <th>Numero de compteur</th>
-                        <th>Index</th>
-                        <th>Releveur</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>RF123</td>
-                        <td>Tunis</td>
-                        <td>Aymen Zayani</td>
-                        <td>123456</td>
-                        <td></td>
-                        <td>
-                            <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>RF123</td>
-                        <td>Bardo</td>
-                        <td>Hafedh Baazouzi</td>
-                        <td>636660</td>
-                        <td></td>
-                        <td>
-                            <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>RF231</td>
-                        <td>Ben Arous</td>
-                        <td>Med Ali Amri</td>
-                        <td>662025</td>
-                        <td></td>
-                        <td>
-                            <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                        </td>
-                    </tr>
-                  
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <!-- END DEFAULT DATATABLE -->
-    <div class="panel panel-default">
-            <div class="panel-heading">                                
-                <h3 class="panel-title">Tournée T2</h3>
-                <ul class="panel-controls">
-                    <li> <button class="btn btn-primary">Affecter</button></li>
-                    <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
-                    <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
-                </ul>                                
-            </div>
-            <div class="panel-body">
-                <table class="table datatable">
-                    <thead>
-                        <tr>
-                            <th>Reference PDL</th>
-                            <th>Adresse</th>
-                            <th>Proprietaire</th>
-                            <th>Numero de compteur</th>
-                            <th>Index</th>
-                            <th>Releveur</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>RF123</td>
-                            <td>Tunis</td>
-                            <td>Aymen Zayani</td>
-                            <td>123456</td>
-                            <td></td>
-                            <td>
-                                <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>RF123</td>
-                            <td>Bardo</td>
-                            <td>Hafedh Baazouzi</td>
-                            <td>636660</td>
-                            <td></td>
-                            <td>
-                                <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>RF231</td>
-                            <td>Ben Arous</td>
-                            <td>Med Ali Amri</td>
-                            <td>662025</td>
-                            <td></td>
-                            <td>
-                                <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                            </td>
-                        </tr>
-                      
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- END DEFAULT DATATABLE -->
-        <div class="panel panel-default">
+            <div class="panel panel-default">
                 <div class="panel-heading">                                
-                    <h3 class="panel-title">Tournée T3</h3>
+                    <h3 class="panel-title">Tournée T2</h3>
                     <ul class="panel-controls">
-                        <li> <button class="btn btn-primary">Affecter</button></li>
+                        <li> <button class="btn btn-primary" (click)="open(content4)">Affecter</button></li>
                         <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
-                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
                     </ul>                                
                 </div>
                 <div class="panel-body">
@@ -176,91 +148,50 @@
                                 <td>Aymen Zayani</td>
                                 <td>123456</td>
                                 <td></td>
-                                <td>
-                                    <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>RF123</td>
-                                <td>Bardo</td>
-                                <td>Hafedh Baazouzi</td>
-                                <td>636660</td>
                                 <td></td>
-                                <td>
-                                    <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>RF231</td>
-                                <td>Ben Arous</td>
-                                <td>Med Ali Amri</td>
-                                <td>662025</td>
-                                <td></td>
-                                <td>
-                                    <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                                </td>
                             </tr>
                           
                         </tbody>
                     </table>
                 </div>
             </div>
-            <!-- END DEFAULT DATATABLE -->
-            <div class="panel panel-default">
-                    <div class="panel-heading">                                
-                        <h3 class="panel-title">Tournée T4</h3>
-                        <ul class="panel-controls">
-                            <li> <button class="btn btn-primary">Affecter</button></li>
-                            <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
-                            <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
-                        </ul>                                
-                    </div>
-                    <div class="panel-body">
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th>Reference PDL</th>
-                                    <th>Adresse</th>
-                                    <th>Proprietaire</th>
-                                    <th>Numero de compteur</th>
-                                    <th>Index</th>
-                                    <th>Releveur</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>RF123</td>
-                                    <td>Tunis</td>
-                                    <td>Aymen Zayani</td>
-                                    <td>123456</td>
-                                    <td></td>
-                                    <td>
-                                        <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>RF123</td>
-                                    <td>Bardo</td>
-                                    <td>Hafedh Baazouzi</td>
-                                    <td>636660</td>
-                                    <td></td>
-                                    <td>
-                                        <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>RF231</td>
-                                    <td>Ben Arous</td>
-                                    <td>Med Ali Amri</td>
-                                    <td>662025</td>
-                                    <td></td>
-                                    <td>
-                                        <button class="btn btn-default btn-rounded btn-sm" (click)="open(content4)"><span class="fa fa-plus-circle"></span></button>
-                                    </td>
-                                </tr>
-                              
-                            </tbody>
-                        </table>
-                    </div>
+        </div>
+    </div>-->
+    <!-- END DEFAULT DATATABLE -->
+        <!--<div class="panel panel-default">
+                <div class="panel-heading">                                
+                    <h3 class="panel-title">Tournée T3</h3>
+                    <ul class="panel-controls">
+                        <li> <button class="btn btn-primary" (click)="open(content4)">Affecter</button></li>
+                        <li><button class="btn btn-outline-dark" style="margin-left: 10px;">Decomposer</button></li>
+                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                        
+                    </ul>                                
                 </div>
-                <!-- END DEFAULT DATATABLE -->
+                <div class="panel-body">
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th>Reference PDL</th>
+                                <th>Adresse</th>
+                                <th>Proprietaire</th>
+                                <th>Numero de compteur</th>
+                                <th>Index</th>
+                                <th>Releveur</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>RF123</td>
+                                <td>Tunis</td>
+                                <td>Aymen Zayani</td>
+                                <td>123456</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>-->
+            <!-- END DEFAULT DATATABLE -->

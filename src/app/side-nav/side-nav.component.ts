@@ -12,23 +12,19 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class SideNavComponent implements OnInit {
 
   private responsable:Responsable;
-  private logincomp:LoginComponent;
-  constructor(private loginService:LoginService, public _DomSanitizer: DomSanitizer) { }
+  constructor(private loginService:LoginService) { }
 
   ngOnInit() {
     this.responsable=new Responsable();
-    this.getResponsable()
+    this.getResponsable(localStorage.getItem('login'));
   }
 
-  transform(value){
-    return this._DomSanitizer.bypassSecurityTrustHtml(value);
-    }
-  public getResponsable(){
-    this.loginService.getUserByLogin(localStorage.getItem('login'))
+  public getResponsable(login:string){
+    this.loginService.getUserByLogin(login)
     .subscribe(
       data => {
         this.responsable = data;
-        this.responsable.cmpt_PIC=this.transform(this.responsable.cmpt_PIC);
+        //this.responsable.cmpt_PIC=this.transform(this.responsable.cmpt_PIC);
       },
       err => {
         console.log(err);

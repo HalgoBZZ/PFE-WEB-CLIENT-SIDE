@@ -44,6 +44,15 @@ import { PassforgetComponent } from './passforget/passforget.component';
 import { CodeverificationComponent } from './codeverification/codeverification.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { SecteurService } from './services/secteur.service';
+import { PdlComponent } from './pdl/pdl.component';
+import { ReleveComponent } from './releve/releve.component';
+import { MesuresComponent } from './mesures/mesures.component';
+import { PdlService } from './services/pdl.service';
+import { ReleveService } from './services/releve.service';
+import { MesureService } from './services/mesure.service';
+import { IndexedDbService } from './services/indexed-db.service';
+import { StorageServiceModule} from 'angular-webstorage-service';
+import { StorageService } from './services/storage.service';
 
 
 
@@ -72,6 +81,9 @@ import { SecteurService } from './services/secteur.service';
     PassforgetComponent,
     CodeverificationComponent,
     ChangepasswordComponent,
+    PdlComponent,
+    ReleveComponent,
+    MesuresComponent,
   ],
   entryComponents: [],
 
@@ -79,6 +91,7 @@ import { SecteurService } from './services/secteur.service';
     NgbModule,
     NgbModule.forRoot(),
     BrowserModule,
+    StorageServiceModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -97,7 +110,12 @@ import { SecteurService } from './services/secteur.service';
   LoginService,
   UploadImageService,
   LoaderService,
-  SecteurService
+  SecteurService,
+  PdlService,
+  ReleveService,
+  MesureService,
+  IndexedDbService,
+  StorageService
 ],
   bootstrap: [AppComponent]
 })

@@ -19,6 +19,9 @@ import { HeaderComponent } from './header/header.component';
 import { PassforgetComponent } from './passforget/passforget.component';
 import { CodeverificationComponent } from './codeverification/codeverification.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { PdlComponent } from './pdl/pdl.component';
+import { ReleveComponent } from './releve/releve.component';
+import { MesuresComponent } from './mesures/mesures.component';
 
 
 const appRoutes :Routes=[
@@ -39,7 +42,10 @@ const appRoutes :Routes=[
         { path : 'dashboard', component : DashboardComponent, outlet: 'child1' },
         { path : 'help', component: HelpComponent, outlet: 'child1' },
         { path : 'profile', component: ProfileComponent, outlet: 'child1' },
-        { path : '**', component: NotFoundComponent, outlet: 'notfound' }
+        { path : '**', component: NotFoundComponent, outlet: 'notfound' },
+        { path : 'pdl', component: PdlComponent, outlet: 'child1'},
+        { path : 'releve', component:ReleveComponent, outlet: 'child1'},
+        { path : 'mesures', component:MesuresComponent, outlet: 'child1'}
     ]},
         
 ] ;

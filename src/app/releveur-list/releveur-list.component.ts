@@ -3,7 +3,7 @@ import { FormControl,NgForm, FormGroup, Validators } from "@angular/forms";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ReleveurService } from '../services/releveur.service';
 import { Releveur } from '../models/releveur';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Responsable } from '../models/responsable';
 import { UploadImageService } from '../services/upload-image.service';
 import { LoaderService } from '../services/loading.service';
@@ -31,7 +31,10 @@ export class ReleveurListComponent implements OnInit {
   constructor(private modalService: NgbModal,
     private releveurService: ReleveurService, 
     private loginService:LoginService,
-    private router:Router, private uploadImageService:UploadImageService, private loaderService : LoaderService) { 
+    private router:Router,
+    private route: ActivatedRoute,     
+    private uploadImageService:UploadImageService, 
+    private loaderService : LoaderService) { 
     }
 
   ngOnInit() {
@@ -52,9 +55,10 @@ export class ReleveurListComponent implements OnInit {
     this.newRel.cmpt_CREDT=new Date();
     this.newRel.cmpt_UPDTDT=new Date();
     this.newRel.responsable=this.responsable;
-    console.log(this.responsable);
     this.releveurService.createReleveur(this.newRel);
     location.reload();
+    //this.router.navigateByUrl('/home/releveurs',{skipLocationChange: true});
+    this.router.navigate(['/releveurs'], { skipLocationChange: true });  
   }
 
   open(content) {
@@ -86,6 +90,7 @@ export class ReleveurListComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -117,13 +122,13 @@ export class ReleveurListComponent implements OnInit {
 
   
 
-  deleteReleveur(releveur:Releveur):void{
+  deleteReleveur(releveur:Releveur){
     this.releveurService.deleteReleveur(releveur).subscribe(
       res => {
+        console.log("deleted!!");
         this.getReleveurs();
-        this.router.navigate(['/releveurs']);
       });
-      location.reload();
+     // location.reload();
   }
 
   handleFileSelect(evt) {

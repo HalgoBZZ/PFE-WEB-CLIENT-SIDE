@@ -21,6 +21,7 @@ export class PlanificationComponent implements OnInit {
   private secteurs:any;
   private secteur:Secteur;
 
+
   constructor(private modalService: NgbModal, 
     private planificationService: PlanificationService, 
     private router: Router,private secteurService:SecteurService) { 
@@ -32,7 +33,7 @@ export class PlanificationComponent implements OnInit {
     this.getPlanifications();
     this.secteur=new Secteur();
     this.planification=new Planification();
-    this.planificationup=new Planification();
+    //this.planificationup=new Planification();
   }
 
   public getPlanifications() {
@@ -62,7 +63,7 @@ export class PlanificationComponent implements OnInit {
     this.planification.planif_CREDT=new Date();
     this.planification.planif_UPDTDT=new Date();
     this.planificationService.createPlanification(this.planification);
-   location.reload
+    location.reload();
   }
 
   public updatePlanification(planificationup: Planification):void{
@@ -107,6 +108,8 @@ export class PlanificationComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

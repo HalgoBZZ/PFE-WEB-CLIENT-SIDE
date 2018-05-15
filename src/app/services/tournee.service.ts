@@ -14,21 +14,30 @@ export class TourneeService {
   constructor(private http:Http) { }
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private tourneesUrl = 'http://localhost:8080/tournees';
+  private pdlUrl='http://localhost:8080/pdls';
 
 
   public getTournees(): Observable<Tournee[]> {
-    return this.http.get(this.tourneesUrl + "/all")
+    let jwtToken=localStorage.getItem('token');
+    this.headers.append("Authorization", `JWT ${jwtToken}`);
+    return this.http.get(this.tourneesUrl + "/all", { headers: this.headers })
     .map((res:Response)=> res.json())
     .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
   }
  
+  public getNonAffecter(): Observable<Tournee[]> {
+    let jwtToken=localStorage.getItem('token');
+    this.headers.append("Authorization", `JWT ${jwtToken}`);
+    return this.http.get(this.tourneesUrl + "/nonaffecter",{ headers: this.headers })
+    .map((res:Response)=> res.json())
+    .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
+  }
  
-  public getTournee(id: number): Promise<Tournee> {
+  public getTournee(id: number): Observable<Tournee> {
     const url = `${this.tourneesUrl}/get/${id}`;
     return this.http.get(url)
-      .toPromise()
-      .then(response => response.json() as Tournee)
-      .catch(this.handleError);
+    .map((res:Response)=> res.json())
+    .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
   }
  
  
@@ -48,7 +57,7 @@ export class TourneeService {
       .catch(this.handleError);
   }
  
-  public deletePlanification(tournee: Tournee) {
+  public deleteTournee(tournee: Tournee) {
     const url = `${this.tourneesUrl}/delete/${tournee.tour_ID}`;
     return this.http.delete(url);
       
