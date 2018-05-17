@@ -24,10 +24,26 @@ export class PdlService {
     .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
   }
 
+  getPdls(): Observable<Pdl[]>{
+    let jwtToken=localStorage.getItem('token');
+    this.headers.append("Authorization", `JWT ${jwtToken}`);
+    const url = `${this.pdlsUrl}/all`;
+    return this.http.get(url,{headers: this.headers})
+    .map((res:Response)=> res.json())
+    .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
+  }
+
   public getPdl(id: number): Observable<Pdl> {
     const url = `${this.pdlsUrl}/get/${id}`;
     return this.http.get(url)
     .map((res:Response)=> res.json())
     .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
   }
+
+  public fetchPdls() {
+    let jwtToken=localStorage.getItem('token');
+    this.headers.append("Authorization", `JWT ${jwtToken}`);
+    const url = `${this.pdlsUrl}/all`;
+    return this.http.get(url,{headers: this.headers}).map((res: Response) => res.json())
+}
 }

@@ -32,23 +32,6 @@ export class TourneeNonEffectueeComponent implements OnInit {
     this.relShow=new Releveur()
     this.getTournees();
     this.getReleveurs();
-
-    /*let storesSchema = [
-      {
-          name: 'tournee',
-          indexes: ['id'],
-      }
-  ];
-   
-  // Create the IndexedDB database and perform few operations.
-  let self = this;
-  this.indexeddbService.setName('temporaldb');
-  this.indexeddbService.clear().subscribe(done => {
-      self.indexeddbService.create(storesSchema).subscribe(done => {
-          self.databaseCreated = true;
-      });
-    });*/
-
   }
 
   public getTournees() {

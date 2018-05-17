@@ -22,6 +22,9 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { PdlComponent } from './pdl/pdl.component';
 import { ReleveComponent } from './releve/releve.component';
 import { MesuresComponent } from './mesures/mesures.component';
+import { Pdl2Component } from './pdl2/pdl2.component';
+import { Releve2Component } from './releve2/releve2.component';
+import { Mesure2Component } from './mesure2/mesure2.component';
 
 
 const appRoutes :Routes=[
@@ -45,7 +48,10 @@ const appRoutes :Routes=[
         { path : '**', component: NotFoundComponent, outlet: 'notfound' },
         { path : 'pdl', component: PdlComponent, outlet: 'child1'},
         { path : 'releve', component:ReleveComponent, outlet: 'child1'},
-        { path : 'mesures', component:MesuresComponent, outlet: 'child1'}
+        { path : 'mesures', component:MesuresComponent, outlet: 'child1'},
+        { path : 'pdl2', component: Pdl2Component, outlet: 'child1'},
+        { path : 'releve2', component:Releve2Component, outlet: 'child1'},
+        { path : 'mesures2', component:Mesure2Component, outlet: 'child1'}
     ]},
         
 ] ;

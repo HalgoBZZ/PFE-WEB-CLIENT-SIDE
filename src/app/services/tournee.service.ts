@@ -15,6 +15,7 @@ export class TourneeService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private tourneesUrl = 'http://localhost:8080/tournees';
   private pdlUrl='http://localhost:8080/pdls';
+  private mesuresUrl="http://localhost:8080/mesurecadrans"
 
 
   public getTournees(): Observable<Tournee[]> {
@@ -29,6 +30,14 @@ export class TourneeService {
     let jwtToken=localStorage.getItem('token');
     this.headers.append("Authorization", `JWT ${jwtToken}`);
     return this.http.get(this.tourneesUrl + "/nonaffecter",{ headers: this.headers })
+    .map((res:Response)=> res.json())
+    .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
+  }
+
+  public getAvalider(): Observable<Tournee[]> {
+    let jwtToken=localStorage.getItem('token');
+    this.headers.append("Authorization", `JWT ${jwtToken}`);
+    return this.http.get(this.mesuresUrl + "/tourneeavalider",{ headers: this.headers })
     .map((res:Response)=> res.json())
     .catch((error:any) => Observable.throw(error.json().error ||'Server error'));
   }

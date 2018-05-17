@@ -53,6 +53,9 @@ import { MesureService } from './services/mesure.service';
 import { IndexedDbService } from './services/indexed-db.service';
 import { StorageServiceModule} from 'angular-webstorage-service';
 import { StorageService } from './services/storage.service';
+import { Pdl2Component } from './pdl2/pdl2.component';
+import { Releve2Component } from './releve2/releve2.component';
+import { Mesure2Component } from './mesure2/mesure2.component';
 
 
 
@@ -84,6 +87,9 @@ import { StorageService } from './services/storage.service';
     PdlComponent,
     ReleveComponent,
     MesuresComponent,
+    Pdl2Component,
+    Releve2Component,
+    Mesure2Component,
   ],
   entryComponents: [],
 

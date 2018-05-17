@@ -1,0 +1,54 @@
+<!-- LIST GROUP WITH BADGES -->
+<div class="btn-group pull-left"> 
+  <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title">PDL: {{pdl.pdl_REFE}}</h3>
+              <div class="btn-group pull-right">  
+                  <button class="btn btn-default" (click)="viderStockage()" [routerLink]="['/home', {outlets: {child1: ['pdl2']}}]" skipLocationChange>Retour</button>            
+              </div>
+          </div>
+          <div class="panel-body">
+              <ul class="list-group border-bottom">
+                  <li class="list-group-item">Reference de PDL : <span class="badge badge-success">{{pdl.tour_NAME}}</span></li>
+                  <li class="list-group-item">Commentaire sur PDL : <span class="badge badge-success">{{pdl.pdl_COMMENT}}</span></li>
+                  <li class="list-group-item">Ordre dans la tournée : <span class="badge badge-success">{{pdl.pdl_ROUTERORDER}}</span></li>
+                  <li class="list-group-item">Besoin d'un rendez-vous : <span class="badge badge-success">{{pdl.pdl_NEEDRDV}}</span></li>
+                  <li class="list-group-item">Adresse de PDL : <span class="badge badge-success">{{pdl.pdl_ADRESS}}</span></li>
+                  <li class="list-group-item">Etat de releve : <span class="badge badge-success">{{pdl.pdl_DIFFREAD}}</span></li>
+                  <li class="list-group-item">Date de création : <span class="badge badge-success">{{pdl.secteur.pdl_CREDT}}</span></li>
+                  <li class="list-group-item">Date de dérniére mise à jour : <span class="badge badge-success">{{pdl.secteur.pdl_UPDTDT}}</span></li>
+                  <li class="list-group-item">Accessibilité : <span class="badge badge-success">{{pdl.secteur.pdl_ACCESS}}</span></li>
+              </ul>                            
+          </div>
+  </div>
+  </div> 
+      <!-- END LIST GROUP WITH BADGES -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Liste des releves de PDL {{pdl.pdl_REFE}}</h3>  
+    </div>
+    <div class="panel-body">
+        <table id="customers2" class="table datatable">
+            <thead>
+                <tr>
+                    <th>ID de compteur</th>
+                    <th>Commentaire</th>
+                    <th>Date de reléve</th>
+                    <th>Date de création</th>
+                    <th>Date de mise à jour</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let releve of releves">                    
+                    <td>{{releve.equ_ID}}</td>
+                    <td>{{releve.rele_COMMENT}}</td>
+                    <td>{{releve.rele_DT}}</td>
+                    <td>{{releve.rele_CREDT}}</td>
+                    <td>{{releve.rele_UPDTDT}}</td>
+                    <td> <button class="btn btn-default btn-rounded btn-sm" (click)="enreg(releve)" [routerLink]="['/home', {outlets: {child1: ['mesures2']}}]" skipLocationChange><span class="fa fa-info-circle" title="Details"></span></button></td>
+                    </tr>                              
+            </tbody>
+        </table>                                     
+    </div>
+  </div>

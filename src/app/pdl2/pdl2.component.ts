@@ -6,21 +6,19 @@ import { TourneeService } from '../services/tournee.service';
 import { Tournee } from '../models/tournee';
 
 @Component({
-  selector: 'app-pdl',
-  templateUrl: './pdl.component.html',
-  styleUrls: ['./pdl.component.css']
+  selector: 'app-pdl2',
+  templateUrl: './pdl2.component.html',
+  styleUrls: ['./pdl2.component.css']
 })
-export class PdlComponent implements OnInit {
-
+export class Pdl2Component implements OnInit {
   private val:number;
-  private pdls:Pdl[];
+  private pdls:any;
   private tour:Tournee;
   constructor(private pdlService:PdlService,
     private storage:StorageService,
     private tourService:TourneeService) { }
 
   ngOnInit() {
-    this.pdls=new Array<Pdl>();
     this.val=parseInt(localStorage.getItem('tournee'));
     this.getPdls(this.val);
     this.tour=new Tournee();
@@ -60,4 +58,5 @@ export class PdlComponent implements OnInit {
     this.storage.saveInLocal('pdl',pdl.pdl_ID);
    }
  
+
 }
