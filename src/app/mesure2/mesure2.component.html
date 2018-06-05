@@ -9,11 +9,11 @@
           </div>
           <div class="panel-body">
               <ul class="list-group border-bottom">
-                  <li class="list-group-item">ID de compteur: <span class="badge badge-success">{{releve.equ_ID}}</span></li>
-                  <li class="list-group-item">Commentaire sur la tournée : <span class="badge badge-success">{{releve.rele_COMMENT}}</span></li>
-                  <li class="list-group-item">Date de releve : <span class="badge badge-success">{{releve.rele_DT}}</span></li>
-                  <li class="list-group-item">Date de création de tournée : <span class="badge badge-success">{{releve.rele_CREDT}}</span></li>
-                  <li class="list-group-item">Date de dérniére mise à jour : <span class="badge badge-success">{{releve.rele_UPDTDT}}</span></li>
+                  <li class="list-group-item"><b>ID de compteur:</b> <span class="badge badge-success">{{releve.equ_ID}}</span></li>
+                  <li class="list-group-item"><b>Commentaire sur la tournée :</b> <span class="badge badge-success">{{releve.rele_COMMENT}}</span></li>
+                  <li class="list-group-item"><b>Date de releve : </b><span class="badge badge-success">{{releve.rele_DT}}</span></li>
+                  <li class="list-group-item"><b>Date de création de tournée :</b> <span class="badge badge-success">{{releve.rele_CREDT}}</span></li>
+                  <li class="list-group-item"><b>Date de dérniére mise à jour :</b> <span class="badge badge-success">{{releve.rele_UPDTDT}}</span></li>
                  </ul>             
            </div>
       </div>
@@ -22,6 +22,18 @@
   <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Liste des mesures de releve de compteur {{releve.equ_ID}}</h3>
+        <div class="pull-right" style="margin-bottom: 15px;">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </div>
+                                <input type="search" class="form-control" name="searchString" placeholder="Recherche"  [(ngModel)]="searchString"
+                                [value]="searchString">
+                    </div>
+                        </div>
+                </form>
     </div>
     <div class="panel-body">
         <table id="customers2" class="table datatable">
@@ -35,7 +47,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let mesure of mesures">                    
+                <tr *ngFor="let mesure of mesures | filterMesure : searchString; let i = index">                    
                     <td>{{mesure.mesu_CAD_NAME}}</td>
                     <td>{{mesure.mesu_CAD_CODE}}</td>
                     <td>{{mesure.mes_CAD_INDEX}}</td>

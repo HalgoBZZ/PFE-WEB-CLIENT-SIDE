@@ -5,6 +5,7 @@ import { ResponsableService } from '../services/responsable.service';
 import { Router } from '@angular/router';
 import { Responsable } from '../models/responsable';
 import { LoaderService } from '../services/loading.service';
+import { FilterRespPipe } from '../pipes/filter-resp.pipe';
 
 
 @Component({
@@ -22,7 +23,9 @@ export class ResponsableListComponent implements OnInit {
   private newRes:Responsable;
 
   constructor(private modalService: NgbModal, 
-  private responsableService:ResponsableService, private router:Router, private loaderService : LoaderService) { }
+  private responsableService:ResponsableService, private router:Router, 
+  private loaderService : LoaderService,
+  private filtre:FilterRespPipe) { }
 
   ngOnInit() {
     this.newRes=new Responsable();

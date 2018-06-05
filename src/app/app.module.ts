@@ -56,8 +56,8 @@ import { StorageService } from './services/storage.service';
 import { Pdl2Component } from './pdl2/pdl2.component';
 import { Releve2Component } from './releve2/releve2.component';
 import { Mesure2Component } from './mesure2/mesure2.component';
-
-
+import { FilterPipeModule } from './filter.pipe.module';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -103,7 +103,9 @@ import { Mesure2Component } from './mesure2/mesure2.component';
     ReactiveFormsModule,
     HttpClientModule,
     HttpModule,
-    routing
+    routing,
+    FilterPipeModule,
+    NgxPaginationModule
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
      // apiKey: 'AIzaSyBOogobsBag7Ubi30TO5g077ovV8S7dpCg'

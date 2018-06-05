@@ -148,7 +148,7 @@
   <ng-template #content3 let-c="close" let-d="dismiss">
         <form #updateForm="ngForm" (ngSubmit)="updateReleveur(releveurup)">
         <div class="modal-header">
-          <h4 class="modal-title">Mise à jour d'un releveur</h4>
+          <h4 class="modal-title">Mise à jour de releveur {{releveurup.cmpt_LAST_NAME}} {{releveurup.cmpt_FIRST_NAME}}</h4>
           <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -280,18 +280,33 @@
  <!-- START DATATABLE EXPORT -->
  <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Liste des Releveurs</h3>
+        <div>
+            <h1 class="panel-title">Liste des Releveurs</h1>
+        </div>
         <div class="btn-group pull-right">
             <button class="btn btn-success" (click)="open(content)">Nouveau Releveur</button>
         </div>                                    
         
     </div>
     <div class="panel-body">
-        <table id="customers2" class="table datatable">
+            <div class="pull-left" style="margin-bottom: 15px;">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-search"></i>
+                                </div>
+                                    <input type="search" class="form-control" name="searchString" placeholder="Recherche"  [(ngModel)]="searchString"
+                                    [value]="searchString">
+                        </div>
+                            </div>
+                    </form>
+             </div>
+        <table datatable id="customers2" class="table datatable">
             <thead>
                 <tr>
                     <th>photo</th>
-                    <th>Nom</th>
+                    <th >Nom</th>
                     <th>Prénom</th>
                     <th>Sexe</th>
                     <th>Date de naissance</th>
@@ -304,15 +319,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let releveur of releveurs">                    
+                <tr *ngFor="let releveur of releveurs | filter : searchString; let i = index">                    
                     <td>
                         <a class="gallery-item" href="data:image/jpg;base64,{{ releveur.cmpt_PIC }}" data-gallery>
                             <div class="image">                              
                                     <img src="data:image/jpg;base64,{{ releveur.cmpt_PIC }}" class="img-responsive" style="height: 70px;"/>                                                                                                          
                             </div>                              
                         </a>
-                                
-                       
                     </td>
                     <td>{{releveur.cmpt_FIRST_NAME}}</td>
                     <td>{{releveur.cmpt_LAST_NAME}}</td>
@@ -324,13 +337,12 @@
                     <td>{{releveur.cmpt_CREDT}}</td>
                     <td>{{releveur.cmpt_UPDTDT}}</td>
                     <td>
-                            <button class="btn btn-default btn-rounded btn-sm" (click)="openforUpdate(content3,releveur)"><span class="fa fa-pencil"></span></button>
-                            <button class="btn btn-danger btn-rounded btn-sm" title="Supprimer" (click)="deleteReleveur(releveur)"><span class="fa fa-times"></span></button>
-                        </td>
-                    </tr>                              
+                        <button class="btn btn-default btn-rounded btn-sm" (click)="openforUpdate(content3,releveur)"><span class="fa fa-pencil"></span></button>
+                        <button class="btn btn-danger btn-rounded btn-sm" title="Supprimer" (click)="deleteReleveur(releveur)"><span class="fa fa-times"></span></button>
+                    </td>
+                </tr>                              
             </tbody>
         </table>                                    
-        
     </div>
 </div>
 <!-- END DATATABLE EXPORT -->   

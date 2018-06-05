@@ -1,21 +1,24 @@
 <div class="btn-group pull-left">  
   <!-- LIST GROUP WITH BADGES -->
-  <div class="panel panel-default">
+  <div class="panel panel-default"  style="width:100%;">
           <div class="panel-heading">
               <h3 class="panel-title">Tournée: {{tour.tour_NAME}}</h3>
+              <div class="pull-right" style="margin-bottom: 15px;">
+                    
+             </div>  
               <div class="btn-group pull-right">  
                       <button class="btn btn-default" (click)="viderStockage()" [routerLink]="['/home', {outlets: {child1: ['tourneeavalider']}}]" skipLocationChange>Retour</button>            
                   </div>
           </div>
           <div class="panel-body">
               <ul class="list-group border-bottom">
-                  <li class="list-group-item">Nom de tournée : <span class="badge badge-success">{{tour.tour_NAME}}</span></li>
-                  <li class="list-group-item">Code de tournée : <span class="badge badge-success">{{tour.tour_CODE}}</span></li>
-                  <li class="list-group-item">Commentaire sur la tournée : <span class="badge badge-success">{{tour.tour_COMMENT}}</span></li>
-                  <li class="list-group-item">Date de création de tournée : <span class="badge badge-success">{{tour.tour_CREDT}}</span></li>
-                  <li class="list-group-item">Date de dérniére mise à jour : <span class="badge badge-success">{{tour.tour_UPDTDT}}</span></li>
-                  <li class="list-group-item">Etat de tournee : <span class="badge badge-success">{{tour.tour_STATE}}</span></li>
-                  <li class="list-group-item">Secteur : <span class="badge badge-success">{{tour.secteur.sec_NAME}}</span></li>
+                  <li class="list-group-item"><b>Nom de tournée :</b> <span class="badge badge-success">{{tour.tour_NAME}}</span></li>
+                  <li class="list-group-item"><b>Code de tournée :</b> <span class="badge badge-success">{{tour.tour_CODE}}</span></li>
+                  <li class="list-group-item"><b>Commentaire sur la tournée : </b><span class="badge badge-success">{{tour.tour_COMMENT}}</span></li>
+                  <li class="list-group-item"><b>Date de création de tournée : </b><span class="badge badge-success">{{tour.tour_CREDT}}</span></li>
+                  <li class="list-group-item"><b>Date de dérniére mise à jour :</b> <span class="badge badge-success">{{tour.tour_UPDTDT}}</span></li>
+                  <li class="list-group-item"><b>Etat de tournee :</b> <span class="badge badge-success">{{tour.tour_STATE}}</span></li>
+                  <li class="list-group-item"><b>Secteur :</b> <span class="badge badge-success">{{tour.secteur.sec_NAME}}</span></li>
               </ul>                                
           </div>
       </div>
@@ -24,6 +27,19 @@
 <div class="panel panel-default">
 <div class="panel-heading">
 <h3 class="panel-title">Liste des PDL de tournée {{tour.tour_NAME}}</h3>
+<div class="pull-right" style="margin-bottom: 15px;">
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </div>
+                        <input type="search" class="form-control" name="searchString" placeholder="Recherche"  [(ngModel)]="searchString"
+                        [value]="searchString">
+            </div>
+                </div>
+        </form>
+ </div>  
 </div>
 <div class="panel-body">
 <table id="customers2" class="table datatable">
@@ -42,7 +58,7 @@
 </tr>
 </thead>
 <tbody>
-<tr *ngFor="let pdl of pdls">                    
+<tr *ngFor="let pdl of pdls | filterPdl : searchString; let i = index">                    
 <td>{{pdl.pdl_REFE}}</td>
 <td>{{pdl.pdl_COMMENT}}</td>
 <td>{{pdl.pdl_ROUTERORDER}}</td>

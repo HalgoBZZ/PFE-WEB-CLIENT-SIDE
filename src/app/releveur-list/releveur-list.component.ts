@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Pipe} from '@angular/core';
 import { FormControl,NgForm, FormGroup, Validators } from "@angular/forms";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ReleveurService } from '../services/releveur.service';
@@ -8,12 +8,15 @@ import { Responsable } from '../models/responsable';
 import { UploadImageService } from '../services/upload-image.service';
 import { LoaderService } from '../services/loading.service';
 import { LoginService } from '../services/login.service';
+import { FilterPipe } from '../pipes/filtre.pipe';
+
 
 @Component({
   selector: 'app-releveur-list',
   templateUrl: './releveur-list.component.html',
   styleUrls: ['./releveur-list.component.css'],
   providers: [ReleveurService]
+  //pipes: [ReleveurEmailFilter]
 })
 export class ReleveurListComponent implements OnInit {
    private closeResult: string;
@@ -22,19 +25,23 @@ export class ReleveurListComponent implements OnInit {
    private showLoader : boolean;
    private releveurup:Releveur;
    private newRel:Releveur;
-   
+   public searchString: string;
    private url = '';
    private file: File=null;
    private releveurAdded:boolean;
    private responsable:Responsable;
    private valeur:any;
+   private email: string = '';
+
+   
   constructor(private modalService: NgbModal,
     private releveurService: ReleveurService, 
     private loginService:LoginService,
     private router:Router,
     private route: ActivatedRoute,     
     private uploadImageService:UploadImageService, 
-    private loaderService : LoaderService) { 
+    private loaderService : LoaderService,
+    private filter: FilterPipe) { 
     }
 
   ngOnInit() {

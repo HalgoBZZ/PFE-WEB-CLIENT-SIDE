@@ -1425,6 +1425,9 @@ a.list-group-item:focus {
 .panel {
   float: left;
   width: 100%;
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
   border-radius: 0px;
@@ -2378,7 +2381,7 @@ label.valid {
   font-weight: 500;
 }
 .badge {
-  font-size: 11px;
+  font-size: medium;
   line-height: 20px;
   font-weight: 500;
   -moz-border-radius: 3px;

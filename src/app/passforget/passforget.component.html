@@ -1,10 +1,10 @@
 <div class="login-container lightmode">
     <div class="login-box animated fadeInDown">
         <div class="login-body" style="margin-bottom:225px;">
-            <div class="login-title"><strong>Logo</strong></div>
+            <div class="login-title"><img src="../../assets/img/logos.png"></div>
             <div class="alert alert-danger" *ngIf="mode==1">Vérifier vos données...</div>
             <form  class="form-horizontal" #f="ngForm">
-            <div class="form-group" style="margin-top: 100px;">
+            <div class="form-group" style="margin-top: 10px;">
                 <div class="col-md-12">
                     <input type="text" class="form-control" id="login" name="login" [(ngModel)]="pass.cmpt_LOGIN" placeholder="Login" required [ngModelOptions]="{standalone: true}" #login="ngModel" />
                     <div *ngIf="login.errors && (login.dirty || login.touched)" class="alert alert-danger">

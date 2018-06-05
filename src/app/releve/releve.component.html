@@ -9,15 +9,15 @@
         </div>
         <div class="panel-body">
             <ul class="list-group border-bottom">
-                <li class="list-group-item">Reference de PDL : <span class="badge badge-success">{{pdl.tour_NAME}}</span></li>
-                <li class="list-group-item">Commentaire sur PDL : <span class="badge badge-success">{{pdl.pdl_COMMENT}}</span></li>
-                <li class="list-group-item">Ordre dans la tournée : <span class="badge badge-success">{{pdl.pdl_ROUTERORDER}}</span></li>
-                <li class="list-group-item">Besoin d'un rendez-vous : <span class="badge badge-success">{{pdl.pdl_NEEDRDV}}</span></li>
-                <li class="list-group-item">Adresse de PDL : <span class="badge badge-success">{{pdl.pdl_ADRESS}}</span></li>
-                <li class="list-group-item">Etat de releve : <span class="badge badge-success">{{pdl.pdl_DIFFREAD}}</span></li>
-                <li class="list-group-item">Date de création : <span class="badge badge-success">{{pdl.secteur.pdl_CREDT}}</span></li>
-                <li class="list-group-item">Date de dérniére mise à jour : <span class="badge badge-success">{{pdl.secteur.pdl_UPDTDT}}</span></li>
-                <li class="list-group-item">Accessibilité : <span class="badge badge-success">{{pdl.secteur.pdl_ACCESS}}</span></li>
+                <li class="list-group-item"><b>Reference de PDL : </b><span class="badge badge-success">{{pdl.tour_NAME}}</span></li>
+                <li class="list-group-item"><b>Commentaire sur PDL : </b><span class="badge badge-success">{{pdl.pdl_COMMENT}}</span></li>
+                <li class="list-group-item"><b>Ordre dans la tournée :</b> <span class="badge badge-success">{{pdl.pdl_ROUTERORDER}}</span></li>
+                <li class="list-group-item"><b>Besoin d'un rendez-vous :</b> <span class="badge badge-success">{{pdl.pdl_NEEDRDV}}</span></li>
+                <li class="list-group-item"><b>Adresse de PDL : </b><span class="badge badge-success">{{pdl.pdl_ADRESS}}</span></li>
+                <li class="list-group-item"><b>Etat de releve :</b> <span class="badge badge-success">{{pdl.pdl_DIFFREAD}}</span></li>
+                <li class="list-group-item"><b>Date de création :</b> <span class="badge badge-success">{{pdl.secteur.pdl_CREDT}}</span></li>
+                <li class="list-group-item"><b>Date de dérniére mise à jour :</b> <span class="badge badge-success">{{pdl.secteur.pdl_UPDTDT}}</span></li>
+                <li class="list-group-item"><b>Accessibilité : </b><span class="badge badge-success">{{pdl.secteur.pdl_ACCESS}}</span></li>
             </ul>                            
         </div>
 </div>
@@ -25,7 +25,20 @@
     <!-- END LIST GROUP WITH BADGES -->
 <div class="panel panel-default">
   <div class="panel-heading">
-      <h3 class="panel-title">Liste des releves de PDL {{pdl.pdl_REFE}}</h3>  
+      <h3 class="panel-title">Liste des releves de PDL {{pdl.pdl_REFE}}</h3>
+      <div class="pull-right" style="margin-bottom: 15px;">
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                        </div>
+                            <input type="search" class="form-control" name="searchString" placeholder="Recherche"  [(ngModel)]="searchString"
+                            [value]="searchString">
+                </div>
+                    </div>
+            </form>
+     </div>    
   </div>
   <div class="panel-body">
       <table id="customers2" class="table datatable">
@@ -40,7 +53,7 @@
               </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let releve of releves">                    
+              <tr *ngFor="let releve of releves | filterReleve : searchString; let i = index">                    
                   <td>{{releve.equ_ID}}</td>
                   <td>{{releve.rele_COMMENT}}</td>
                   <td>{{releve.rele_DT}}</td>

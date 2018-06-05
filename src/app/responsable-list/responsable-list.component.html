@@ -154,6 +154,19 @@
         
     </div>
     <div class="panel-body">
+            <div class="pull-left" style="margin-bottom: 15px;">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-search"></i>
+                                </div>
+                                    <input type="search" class="form-control" name="searchString" placeholder="Recherche"  [(ngModel)]="searchString"
+                                    [value]="searchString">
+                        </div>
+                            </div>
+                    </form>
+             </div>
         <table id="customers2" class="table datatable">
             <thead>
                 <tr>
@@ -169,11 +182,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let responsable of responsables">
+                <tr *ngFor="let responsable of responsables | filterResp : searchString; let i = index">
                         <td>
                                 <a class="gallery-item" href="data:image/jpg;base64,{{ responsable.cmpt_PIC }}" data-gallery>
                                     <div class="image">                              
-                                            <img src="data:image/jpg;base64,{{ responsable.cmpt_PIC }}" class="img-responsive"/>                                                                                                          
+                                            <img src="data:image/jpg;base64,{{ responsable.cmpt_PIC }}" class="img-responsive" style="height: 70px;"/>                                                                                                          
                                     </div>                              
                                 </a>          
                             </td>

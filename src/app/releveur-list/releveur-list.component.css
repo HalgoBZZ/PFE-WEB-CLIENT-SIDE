@@ -35,3 +35,7 @@
 .suc{
     color: springgreen;
 }
+
+thead>tr>th {
+    cursor: pointer;
+}
